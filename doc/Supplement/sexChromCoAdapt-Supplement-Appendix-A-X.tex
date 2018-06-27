@@ -1,0 +1,173 @@
+% Preamble
+\documentclass{article}
+
+%Dependencies
+\usepackage[left]{lineno}
+%\usepackage{indentfirst}
+\usepackage{titlesec}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{color,soul}
+%\usepackage{times}
+\usepackage[sc]{mathpazo} %Like Palatino with extensive math support
+\linespread{1.25}
+% Default margins are too wide all the way around. I reset them here
+\usepackage{fullpage}
+% Force figures to be in correct section
+\usepackage{placeins}
+
+
+% Fonts and language
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[english]{babel}
+\RequirePackage{amsmath,amsfonts,amssymb}
+\RequirePackage{mathpazo}
+\RequirePackage[scaled]{helvet}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{url}
+\RequirePackage[colorlinks=true, allcolors=blue]{hyperref}
+%\RequirePackage[colorlinks=true, allcolors=blue,draft=true]{hyperref}
+\RequirePackage{lettrine}
+\RequirePackage{cleveref}
+
+% Graphics, tables and other formatting
+\RequirePackage{graphicx,xcolor}
+\RequirePackage{colortbl}
+\RequirePackage{booktabs}
+\RequirePackage{tikz}
+\RequirePackage{algorithm}
+\RequirePackage[noend]{algpseudocode}
+\RequirePackage{changepage}
+\RequirePackage[labelfont={bf,sf},%
+                labelsep=space,%
+                figurename=Figure,%
+                singlelinecheck=off,%
+                justification=RaggedRight]{caption}
+%\setlength{\columnsep}{24pt} % Distance between the two columns of text
+\setlength{\parindent}{12pt} % Paragraph indent
+
+% Bibliography
+\usepackage{natbib} \bibpunct{(}{)}{;}{author-year}{}{,}
+\bibliographystyle{amnatnat}
+\addto{\captionsenglish}{\renewcommand{\refname}{Literature Cited}}
+\setlength{\bibsep}{0.0pt}
+
+% Running headers
+\usepackage{fancyhdr}
+\setlength{\headheight}{28pt}
+
+% Graphics package
+\usepackage{graphicx}
+\graphicspath{{../../output/figures/}.pdf}
+
+% New commands: fonts
+%\newcommand{\code}{\fontfamily{pcr}\selectfont}
+%\newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+%% Other Options
+
+% Change subsection numbering
+\renewcommand\thesubsection{\arabic{subsection})}
+\renewcommand\thesubsubsection{}
+
+% Subsubsection Title Formatting
+\titleformat{\subsubsection}    
+{\normalfont\fontsize{12pt}{17}\itshape}{\thesubsubsection}{12pt}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Supplementary Material (Appendices A--X) for: Sexually antagonistic coevolution between the sex chromosomes. \textit{Target Journal}}
+
+\author{Colin Olito$^{\ast}$, Jessica K.~Abbott, \& Katrine K.~Lund-Hansen}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\noindent{} $^{2}$ Department of Biology, Section for Evolutionary Ecology, Lund University, Lund 223 62, Sweden.
+
+\noindent{} $^{\ast}$ Corresponding author e-mail: \url{colin.olito@gmail.com}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Running Header
+\pagestyle{fancyplain}
+\makeatother
+%\lhead{\textit{Supplement to Olito \textit{et al.}. Coadaptation between the sex chromosomes. \textit{Targ.~Journ.}.\\}}
+\lhead{\textit{Supplement to Olito \textit{et al}. (2019). Targ.~J..}\\ }}
+\rhead{\textit{Coadaptation between the sex chromosomes}\\ }
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{12pt}
+
+
+\section*{Appendix A: Development of the recursions}
+\renewcommand{\theequation}{A\arabic{equation}}
+\titleformat{\subsubsection}    
+{\normalfont\fontsize{12pt}{17}\itshape}{\thesubsubsection}{12pt}{}
+
+%\setcounter{subsection}{0}  % reset counter 
+%\setcounter{equation}{0}  % reset counter 
+
+Here, we fully develop the system of recursion equations underlying each of the models described in the main text: ...
+
+\subsection*{Assumptions}
+
+Blah...
+
+\newpage{}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Appendix B: Approximations....}
+\renewcommand{\theequation}{B\arabic{equation}}
+\setcounter{equation}{0}
+\renewcommand{\thefigure}{B\arabic{figure}}
+\setcounter{figure}{0}
+
+
+
+\newpage{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Appendix C: Supplementary Results}
+\renewcommand{\theequation}{D\arabic{equation}}
+\setcounter{equation}{0}
+\renewcommand{\thefigure}{D\arabic{figure}}
+\setcounter{figure}{0}
+
+%\begin{figure}[ht!]
+%\centering
+%\includegraphics[scale=0.58]{./FigB1-Gyno-obOut-funnel}
+%\caption{Invasion of dominant male-sterility mutations into populations with segregating SA variation under obligate outcrossing. Plots show the fraction of parameter conditions maintaining single-locus SA polymorphism (within the range $0 < s_f,s_m \leq 0.5$) where a dominant male-sterility allele at $\mathbf{M}$ can invade populations initially at single-locus equilibrium frequencies for $\mathbf{A}$ with additive fitness effects ($h_f=h_m=1/2$). Results were obtained by evaluating the two relevant candidate leading eigenvalues ($\lambda_{\mathbf{M}}$,$\lambda_{\mathbf{AM}}$) of the Jacobian matrix of the genotype $\times$ transmission mode recursions for populations at the above initial conditions for $1000$ points uniformly distributed throughout the relevant $s_f \times s_m$ paramter space. Blue points indicate parameter sets where $1 - \lambda_{\mathbf{M}} > 0$, and/or $\lambda_{\mathbf{AM}} - 1 > 0$. Solid black lines represent the corresponding single-locus invasion criteria for SA alleles.}
+%\label{fig:GynObOutFunnel}
+%\end{figure}
+%\newpage{}
+
+%\begin{figure}[ht!]
+%\centering
+%\includegraphics[scale=0.58]{./FigB2-Gyno-C25-d80-funnel}
+%\caption{Invasion of dominant male-sterility mutations into populations with segregating SA variation under conditions of low selfing ($C = 0.25$) and high inbreeding depression ($\delta = 0.8$). Plots show the fraction of parameter conditions maintaining single-locus SA polymorphism (within the range $0 < s_f,s_m \leq 0.5$) where a dominant male-sterility allele at $\mathbf{M}$ can invade populations initially at single-locus equilibrium frequencies for $\mathbf{A}$ with additive fitness effects ($h_f=h_m=1/2$). Results were obtained by evaluating the two relevant candidate leading eigenvalues ($\lambda_{\mathbf{M}}$,$\lambda_{\mathbf{AM}}$) of the Jacobian matrix of the genotype $\times$ transmission mode recursions for populations at the above initial conditions for $1000$ points uniformly distributed throughout the relevant $s_f \times s_m$ paramter space. Blue points indicate parameter sets where $1 - \lambda_{\mathbf{M}} > 0$, and/or $\lambda_{\mathbf{AM}} - 1 > 0$. Solid black lines represent the corresponding single-locus invasion criteria for SA alleles.}
+%\label{fig:GynC25d80Funnel}
+%\end{figure}
+%\newpage{}
+%\newpage{}
+
+%\FloatBarrier
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%
+\bibliography{sexChromCoAdapt-Supplement-bibliography}
+
+
+
+\end{document}

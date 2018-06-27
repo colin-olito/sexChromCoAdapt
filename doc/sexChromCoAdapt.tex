@@ -1,0 +1,212 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Preamble
+\documentclass{article}
+
+%Dependencies
+\usepackage[left]{lineno}
+\usepackage{titlesec}
+\usepackage{color,soul}
+\usepackage{ogonek}
+\usepackage{float}
+
+
+% Other Packages
+%\usepackage{times}
+\RequirePackage{fullpage}
+\linespread{1.5}
+\RequirePackage[colorlinks=true, allcolors=blue]{hyperref}
+\RequirePackage[english]{babel}
+\RequirePackage{amsmath,amsfonts,amssymb}
+\RequirePackage[sc]{mathpazo}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{url}
+
+% Bibliography
+%\usepackage[authoryear,sectionbib,sort]{natbib}
+\usepackage{natbib} \bibpunct{(}{)}{;}{author-year}{}{,}
+\bibliographystyle{amnatnat}
+\addto{\captionsenglish}{\renewcommand{\refname}{Literature Cited}}
+\setlength{\bibsep}{0.0pt}
+
+% Graphics package
+\usepackage{graphicx}
+\graphicspath{{../output/figures/}.pdf}
+
+% New commands: fonts
+%\newcommand{\code}{\fontfamily{pcr}\selectfont}
+%\newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\titleformat{\subsubsection}[runin]{\bfseries\itshape}{\thesubsubsection.}{0.5em}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title Page
+
+\title{Sexually antagonistic coevolution between the sex chromosomes}
+\author{Colin Olito$^{\ast}$, Jessica K.~Abbott, \& Katrine K.~Lund-Hansen}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\noindent{} $^{2}$ Department of Biology, Section for Evolutionary Ecology, Lund University, Lund 223 62, Sweden.
+
+\noindent{} $^{\ast}$ Corresponding author e-mail: \url{colin.olito@gmail.com}
+
+\bigskip
+
+\noindent{} \textit{Manuscript elements}: Figure~1, Figure~2, Figure~3, Table~1; Online Supplementary Material: Appendix A -- Development of the recursions; Appendix B -- \hl{___}; Appendix C -- \hl{___}.
+
+\bigskip
+\noindent{} \textit{Running Head}: Coadaptation between the sex chromosomes
+
+\bigskip
+
+\noindent{} \textit{Keywords}: Coevolution; Compensatory evolution; Intralocus sexual conflict;  Sexual dimorphism; Sex chromosome evolution; Sperm Competition.
+
+\bigskip
+
+\noindent{} \textit{Manuscript type}: Major Article
+
+\bigskip
+
+
+% Set line number options
+\linenumbers
+\modulolinenumbers[1]
+\renewcommand\linenumberfont{\normalfont\small}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Main Text
+
+\newpage{}
+\section*{Abstract}
+
+\noindent{} Blah blah blah.
+\newpage{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Models} \label{sec:Models}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Subsection}
+
+
+\begin{linenomath}\begin{align*} \label{eq:FprGyn}
+    q^{f}_{auto}' &= ...  \\
+    q^{m}_{auto}' &= ...  \\
+    q_{y}' &= ..., \numberthis
+\end{align*}\end{linenomath}
+
+\noindent blah blah blah:
+
+\begin{linenomath}\begin{align*} \label{eq:FprGyn}
+    q^{f}_{x}' &= ...  \\
+    q^{m}_{x}' &= ...  \\
+    q_{y}' &= ..., \numberthis
+\end{align*}\end{linenomath}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Analyses} \label{subsec:analyses}
+
+Blah blah blah...
+
+
+\subsection*{Data availability}
+A full development of all models can be found in Appendix A of the Online Supporting Information. Code necessary to reproduce the simulations is available at \textit{github link omitted to maintain author anonymity during peer review and will be provided upon acceptance}.%\url{https://github.com/colin-olito/sexChromCoAdapt}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Results}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{subsection}
+
+Blah blah blah...
+
+\begin{equation}\label{eq:goodStuff}
+	\lambda = the~good~stuff^2.
+\end{equation}
+
+\noindent Blah Blah BLah...
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Discussion}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+What it all means....
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Subsection}
+
+Blah blah blah...
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Acknowledgements}
+To be included upon acceptance...
+%This research was supported by a Wenner-Gren postdoctoral Fellowship to CO, a Carl-Tryggers postdoctoral fellowship to KKL-H, and ERC-StG-2015-678148 and VR-2015-04680 to JKA. The authors thank C.~Venables, ..., for valuable discussion and feedback, as well as EDITOR, and XXX anonymous reviewers. JKA conceived the ideas explored in this study, and developed them with KKL-H and CO. CO developed the theoretical models and performed the analyses. All authors contributed to writing the manuscript.
+
+
+%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%
+\bibliography{sexChromCoAdapt-bibliography}
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Tables 
+
+\begin{table}[htbp]
+\centering
+\caption{\bf Fitness expressions...}
+\begin{tabular}{l c c c c} \hline
+Haplotype & $ AM_1$ & $ AM_2$ & $ aM_1$ & $ aM_2$ \\
+\hline
+Female sex-function & & & & \\
+$ AM_1$ & $1$ & $(1 + k)$ & $(1 - h_f s_f)$        & $(1 - h_f s_f)(1 + k)$ \\
+$ AM_2$ & $-$ & $(1 + k)$ & $(1 - h_f s_f)(1 + k)$ & $(1 - h_f s_f)(1 + k)$ \\
+$ aM_1$ & $-$ & $-$       & $(1 - s_f)$            & $(1 - s_f)(1 + k)$ \\
+$ aM_2$ & $-$ & $-$       & $-$                    & $(1 - s_f)(1 + k)$ \\
+Male sex-function & & & & \\
+$ AM_1$ & $(1 - s_m)$ & $0$ & $(1 - h_m s_m)$ & $0$ \\
+$ AM_2$ & $-$         & $0$ & $0$             & $0$ \\
+$ aM_1$ & $-$         & $-$ & $1$             & $0$ \\
+$ aM_2$ & $-$         & $-$ & $-$             & $0$ \\
+\hline
+\end{tabular}
+\label{tab:fitness}\\
+{\footnotesize Note: Rows and columns indicate the \textit{i}th and \textit{j}th gametic haplotype respectively. The lower triangle of each matrix is the reflection of the upper triangle, and is omitted for simplicity and consistency with the $i \geq j$ row/column indexing used throughout the article.}
+\end{table}
+\newpage{}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Figures 
+
+%\begin{figure}[htbp]
+%\centering
+%\includegraphics[scale=0.57]{./Fig1}
+%\caption{Invasion of unisexuals into populations with pre-existing SA polymorphism. Plots show the fraction of parameter conditions maintaining single-locus SA polymorphism (within the range $0 < s_f,s_m \leq 0.5$) where a dominant sex-specific sterility allele at $\mathbf{M}$ can invade, assuming additive SA fitness effects at the SA $\mathbf{A}$ locus ($h_f=h_m=1/2$), plotted as a function of the recombination rate $r$. Panels A--C show results from the model of gynodioecy via invasion of a male-sterility allele, while planels D--F show results for the model of androdioecy via invasion of a female-sterility allele. For each panel, results are shown for different values of reproductive compensation, $k$, chosen as a fraction of the single-locus invasion threshold for the unisequal sterility allele ($\hat{k}$, which is equal to the right-hand side of Eq(\ref{eq:1LocGyn}) or Eq(\ref{eq:1LocAndro}) for the models of gynodioecy and androdioecy respectively). Hence, the orange, green, and dark blue lines show scenarios where unisexuals experience a decrease in gamete production relative to hermaphrodites of $1$, $5$, and $10\%$. Note the different scale for the x-axis in panels C and F. Results were obtained by evaluating the three candidate leading eigenvalues ($\lambda_{\mathbf{A}}$,$\lambda_{\mathbf{M}}$,$\lambda_{\mathbf{AM}}$) of the Jacobian matrix of the genotype $\times$ transmission mode recursions for populations at the above initial conditions for $1000$ points uniformly distributed throughout the relevant $s_f \times s_m$ parameter space.}
+%\label{fig:PrInv}
+%\end{figure}
+
+%\newpage{}
+
+
+
+\end{document}
