@@ -1,0 +1,207 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Preamble
+\documentclass{article}
+
+%Dependencies
+\usepackage[left]{lineno}
+\usepackage{titlesec}
+\usepackage{color,soul}
+\usepackage{ogonek}
+\usepackage{float}
+
+
+% Other Packages
+%\usepackage{times}
+\RequirePackage{fullpage}
+\linespread{1.5}
+\RequirePackage[colorlinks=true, allcolors=blue]{hyperref}
+\RequirePackage[english]{babel}
+\RequirePackage{amsmath,amsfonts,amssymb}
+\RequirePackage[sc]{mathpazo}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{url}
+
+% Bibliography
+%\usepackage[authoryear,sectionbib,sort]{natbib}
+\usepackage{natbib} \bibpunct{(}{)}{;}{author-year}{}{,}
+\bibliographystyle{amnatnat}
+\addto{\captionsenglish}{\renewcommand{\refname}{Literature Cited}}
+\setlength{\bibsep}{0.0pt}
+
+% Graphics package
+\usepackage{graphicx}
+\graphicspath{{../output/figures/}.pdf}
+
+% New commands: fonts
+%\newcommand{\code}{\fontfamily{pcr}\selectfont}
+%\newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\titleformat{\subsubsection}[runin]{\bfseries\itshape}{\thesubsubsection.}{0.5em}{}
+
+% New variables/operators
+\DeclareMathOperator{\Var}{Var}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title Page
+
+\title{Some Notes for Sexually antagonistic coevolution between the sex chromosomes}
+\author{Colin Olito$^{\ast}$, Jessica K.~Abbott, \& Katrine K.~Lund-Hansen}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\noindent{} $^{2}$ Department of Biology, Section for Evolutionary Ecology, Lund University, Lund 223 62, Sweden.
+
+\bigskip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Main Text
+
+\newpage{}
+\section*{Motivation}
+
+\noindent{} The idea for co-adaptation between sex chromosomes has been floating around for a while, with notable mentions by Rice (1990's), Rice \& Holland (1996), and Abbott et.~al.~(2013). The more specific scenario we are interested in comes from Katrine Lund-Hansen's Ph.D. thesis research. Using a large round-robin crossing design, she was able to reciprocally transplant novel sex chromosomes from different populations into a focal population. The empirical results were suggestive, but not definitive: overall, they seemed to observe increases in male sperm-competitive ability when novel sex chromosomes were introduced into the focal populations, coupled with decreases in offspring survival. However, more detailed sperm competitive assays were inconclusive. From the modelling perspective, the goal is to formalize hypotheses regarding our expectations for the effects of coadaptation between sex-chromosomes on fitness.
+\newpage{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{The basic approach}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+My overall approach here has generally followed Connallon et al.~(2017). Rather than focusing on cycling or ESS behaviour, I am breaking down the process of coadaptation into a single 'cycle', which proceeds as follows: 
+
+\begin{enumerate}
+	\item Invasion of novel Y-linked mutation that improves male sperm-competitive ability, but may also result in lower offspring fitness (we assume equal fitness effects on sons and daughters)
+	\item Invasion of autosomal or X-linked compensatory mutations, which returns offspring fitness to the same level as before the invasion of the mutant Y. Depending on the questions of interest, the compensatory allele may also involve a 'cost of compensation', where the fitness of offspring arising from matings between wild-type males and females carrying the compensatory mutation.
+	\item Fixation of novel Y-linked mutation
+	\item Fixation of the novel compensatory mutation completes the co-evolutionary cycle.
+\end{enumerate}
+
+\noindent{} Ideally, we want the theoretical predictions to be directly testable, so I'm focusing the analysis on a few specific scenarios which should be informative about the contribution of these co-evolutionary cycles to fitness variance. These scenarios are as follows:
+
+\subsection*{Scenario 1: Compensatory dynamics slow relative to $\mathbf{Y}$}
+
+Essentially, this corresponds to a low mutation rate to the compensatory mutation. In this case, the process of coadaptation is characterized by three phases:
+
+\begin{enumerate}
+	\item Invasion and subsequent sweep of mutant $y$, dependent on the balance of selection between improvement in sperm competitive ability ($s_m$) and decreased offspring survival ($s_o$).
+	\item low-fitness 'lag' time \textit{sensu} Connallon et al.~(2017) before a new compensatory mutation establishes
+	\item Invasion and subsequent sweep of mutant compensatory mutation, whether autosomal or X-linked ($a$ or $x$ respectively), completing the coevolutionary cycle.
+\end{enumerate}
+
+\noindent{} In scenario 1, the predictions of interest center on the trajectory of each of the sweeping alleles, and the expected time to fixation for each. Because they are empirically estimable, and because they are more relevant to questions about the contribution of these kinds of loci to SA fitness variation, I think we should focus on $\mathop{{}\mathbb{E}}\Big[\Var(y)\Big]$ and $\mathop{{}\mathbb{E}}\Big[\Var(a~or~x)\Big]$ for these segregating alleles. We can get analytic solutions (or approximations) for these quantities, and it shouldn't take any weird gymnastics.
+
+\subsection*{Scenario 2: Compensatory dynamics fast relative to $\mathbf{Y}$}
+
+This corresponds to a high mutation rate towards the compensatory mutation, and possibly also nearly-neutral dynamics for the Y-linked mutation. This scenario is also more interesting when there is a 'cost of compensation'. In this scenario, the process of coadaptation is characterized by two phases:
+
+\begin{enumerate}
+	\item Invasion and subsequent increase of the mutant $y$ until a critical frequency $\tilde{q}_y$, at which point selection will then favour invading compensatory mutations.
+	\item At this point, we can think about the the process of coadaptation proceeding in one of two ways:
+	\begin{enumerate}
+		\item Invasion of the compensatory mutation, followed by concurrent sweeps for both mutations.
+		\item 'Instantaneous' fixation of the compensatory mutation, followed by the continued, but somewhat accelerated, sweep of the mutant $y$.)
+	\end{enumerate}
+\end{enumerate}
+
+\noindent{} Scenario 2 can be a bit more complicated than scenario 1. In either case, we can get an analytic solution for $\tilde{q}_y$. For situation 2(a), making predictions about the dynamics of $\mathop{{}\mathbb{E}}\Big[\Var(y)\Big]$ and $\mathop{{}\mathbb{E}}\Big[\Var(a~or~x)\Big]$ after reaching $\tilde{q}_y$ will require simulations (it's just not tractable to get analytic solutions for the joint sweeps). However, for 2(b), we should be able to get 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Models} \label{sec:Models}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We model the evolution of two interacting loci located in different genomic regions where parental genotypes determine offspring survival: (1) a Y-linked locus influencing both adult male mating success (e.g., via sperm competition) and subsequent offspring survival; and (2) a compensatory locus influencing offspring survival only that may be located on either an autosome, the X chromosome, or on the mitochondrial genome. We present three models, identified by the location of the compensatory locus: the Autosomal, X-linked, and Mitochondrial models respectively. Generations are discrete, and the life cycle proceeds: (i) birth, (ii) selection on offspring survival, (iii) meiosis and mutation, (iv) selection on male mating success resulting in non-random mating, (v) death of adults. 
+
+In each of the three models, both loci are assumed to be biallelic. The Y-linked locus, $\mathbf{Y}$, has alleles $Y$ and $y$. The compensatory locus is denoted $\mathbf{A}$ (with alleles $A$ and $a$) if it is autosomal; $\mathbf{X}$ (with alleles $X$ and $x$) if it is X-linked; and $\mathbf{M}$ (with alleles $M$ and $m$) if it is mitochondrial (capital letters indicate wild-type alleles while lowercase letters indicate mutant alleles). Following standard population genetic theory, $\mathbf{Y}$ is effectively haploid with paternal inheritance. An autosomal or X-linked compensatory locus ($\mathbf{A}$ and $\mathbf{X}$ respectively) is diploid with bi-parental inheritance, while a mitochondrial compensatory locus ($\mathbf{M}$) is haploid, with homoplasmic maternal inheritance (e.g., see \citealt{FrankHurst1996,ConnallonDowling2017,Roze-etal2005}).
+
+The mutant $y$ chromosome is assumed to increase male mating success by a rate $1 + s_m$ relative to the ancestral $Y$ chromosome. Offspring survival depends on both the paternal genotype at $\mathbf{Y}$ and the maternal genotype at the compensatory locus. For brevity, we describe the offspring fitness expressions resulting from the parental genotype pairings for the Autosomal model in detail, and only note differences from the X-linked and Mitochondrial models (see Table \ref{tab:fitness}). Offspring sired by mutant $y$ males experience reduced survival depending on the mother's genotype at the compensatory locus such that $[y:AA]$, $[y:Aa]$, and $[y:aa]$ matings result in relative offspring fitness expressions of $1 - s_o$, $1 - h_o s_o$, and $1$. Females carrying the mutant $a$ allele incur a 'cost of compensation' when mating with wild-type ($Y$) males: $[Y:AA]$, $[Y:Aa]$, and $[Y:aa]$ result in relative offspring fitnesses of $1$, $1 - h_c s_c$, and $1 - s_c$ respectively. Similar to standard theories of compensatory evolution, the 'cost of compensation' in our models causes each of the mutant alleles ($y$ and $a$) to be deleterious for offspring survival unless both parents are carriers. Although inheritance for both loci is sex-linked in the X-linked model, the offspring fitness expressions remain the same because the compensatory locus is still diploid. In contrast, a Mitochondrial compensatory locus is haploid, and so the fitness expressions concern matings between $[Y:M]$, $[Y:m]$, $[y:M]$, and $[y:m]$ parental genotypes. The  resulting fitness expressions are identical to those described above involving homozygote mothers (see Table \ref{tab:fitness}).
+
+We model single coevolutionary cycles between the male-beneficial Y-linked locus and the compensatory locus (see \citealt{ConnallonDowling2017} for a similar approach in the context of mito-nuclear coevolution). A bout of coevolution begins with the invasion of a single-copy mutant $y$ chromosome in a population fixed for the wild-type $A$ allele at the compensatory locus. The mutant $y$ evolves under net positive selection so long as associated increase in male mating success outweighs the reduction in offspring survival (i.e., $\delta > 0$; where $\delta = (s_m - s_o)$). The mutant $y$ chromosome evolves in this manner until it becomes fixed in the population or is lost. The compensatory $\mathbf{A}$ locus evolves under recurrent mutation and selection, with the population initially fixed for the wild-type $A$ allele ($X$ or $M$ for the X-linked and Mitochondrial models respectively). For simplicity, we assume one-way mutation from $A \rightarrow a$ at a rate $v$ per meiosis. Due to the cost of compensation, whether mutant compensatory alleles evolve under net positive or negative selection depends upon the frequency of the male-beneficial $y$ allele. A coevolutionary cycle completes when both mutant alleles ($y$ and $a$) become fixed.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Contributions to fitness variance} \label{subsec:variances}
+
+Our analyses focus on quantifying the contribution of segregating mutant alleles at each of the two focal loci to the genetic variance for fitness in the population. Following standard quantitative genetic theory (e.g., \citealt{James1973,LynchWalsh1998}), the contribution of a single locus to the variance in a given fitness component is 
+\begin{equation} \label{eq:fitnessVariance}
+	\sigma = q_{i}(1 - q_{i})s_{i}^{2},
+\end{equation}
+
+\noindent where $q_i$ indicates the frequency of the relevant mutant allele, and $s_i$ the homozygote fitness effect. For example, in a population fixed for the wild-type $A$ compensatory allele, a segregating $y$ allele can contribute to male fitness variance through two fitness components: mating success (determined by $q_y$, the frequency of the derived $y$ allele and the relative mating success of mutants $s_m$) and offspring survival (determined by $q_y$, and offspring survival $s_o$). Making the relevant substitutions, we can write $\sigma_{y,m} = q_{y}(1 - q_{y})s_{m}^{2}$ for the fitness variance contributed by $y$ through male mating success, and $\sigma_{y,o} = q_{y}(1 - q_{y})s_{o}^{2}$. The total genetic variance for fitness is then $\sigma_{y} = \sigma_{y,m} + \sigma_{y,o} = \sigma_{y,\delta} = q_{y}(1 - q_{y})\delta^{2}$, where $\delta = s_m - s_o$. Similar calculations apply when the population is fixed for one allele at $\mathbf{Y}$, but there is segregating variation at the compensatory locus. As we outline below, our analytic results emphasize scenarios in which only one locus is segregating for a mutant allele at a time.
+
+\hl{Other considerations for calculating variances...} Variance calculations for sex-linked genes? When both loci are segregating??? 
+
+We can also break down the total genetic variance for fitness into male and female components. In this case, the mode of inheritence for each locus is important. When the effective ploidy is the same for the $\mathbf{Y}$ and compensatory locus
+
+\begin{linenomath}\begin{align*} \label{eq:abc}
+	\sigma_{Y} &= q_{i}(1 - q_{i})s_{i}^{2} \\
+	\sigma_{X} &	= \frac{1}{2}q_{i}(1 - q_{i})s_{i}^{2}, \numberthis
+\end{align*}\end{linenomath}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Analyses} \label{subsec:Analyses}
+
+Each coevolutionary cycle contributes to fitness variance only when derived alleles are segregating at one or both loci; the mutant allele frequency trajectories during the invasions and subsequent sweeps at $\mathbf{Y}$ and the compensatory locus are therefore of central importance. All of our analytic results assume weak selection ($1 \gg s_{\delta}, s_c > 0$), but strong population-scaled selection ($N s_m, N s_o, N s_c \gg 1$), where $N$ is the size of a Wright-Fisher population, and an equal sex ratio. Following standard theory of effective population sizes, we assume that the effective population size is $2N$ for a diploid Autosomal locus (e.g., $\mathbf{A}$), and $N/2$ for both $\mathbf{Y}$ and $\mathbf{M}$, which are haploid, and uniparentally inherited.
+
+The appearance of a new mutant $y$ chromosome at time $t = 0$ initiates a coevolutionary cycle. The frequency of $y$ at time $t$, $q_{y,t}$, increases until it fixes in the population (i.e., until $q_{y,t} = 1$). Following previous theory, we use the deterministic increase of $q_{y,t}$, conditional on its eventual fixation to approximate the trajectory of frequency trajectory of $y$ during a sweep (e.g., \citealt{MaynardSmith1976,Ewens2004}; see Appendix \hl{X} in the Online Supporting Information). For a positively selected $y$ chromosome ($\delta > 0$), the expected evolutionary trajectory of the allele frequency can be approximated as 
+
+\begin{equation} \label{eq:qyt}
+	q_{y,t} = \frac{q_{y,0} e^{\delta t}} {1 - q_{y,0} + q_{y,0} e^{\delta t}}
+\end{equation} 
+
+\noindent where $q_{y,0} = (2/N)(1/2 \delta) = 1/N \delta \ll 1$ is the 'effective' initial frequency of the $y$ allele \citep{MaynardSmith1976,Ewens2004}. As the new $y$ chromosome sweeps through the population, its contribution to genetic variance for fitness through male mating success and offspring survival also changes through time. For example, as described in the \nameref{subsec:variances} subsection, the contribution to fitness variance through male mating success is described by 
+
+\begin{equation} \label{eq:sigma-qyt}
+	\sigma_{m,t} = q_{y,t}(1 - q_{y,t})s_{m}^{2}.
+\end{equation} 
+
+\noindent If the mutation rate at the compensatory locus is sufficiently high, new $a$ mutants may appear while $y$ is still segregating. However, selection at the compensatory locus is influenced by the frequency of the $y$ chromosome, and the genomic location of the compensatory locus. An Autosomal compensatory mutation will only be positively selected when mutant $y$ males reach a threshold frequency of
+
+\begin{equation} \label{eq:qTildeAuto} 
+	\tilde{q}_y^{\text{A}} = \frac{h_c s_c} {h_c s_c + (s_m - \delta)(1 - h_o)(1+s_m)}.
+\end{equation}
+
+\noindent The threshold frequency for selection to favour an X-linked compensatory mutation, $x$, is a more complicated expression. However, under additive fitness it follows the general form
+
+\begin{equation} \label{eq:qTildeX} 
+	\tilde{q}_y^{\text{X}} = \frac{b - \sqrt{b^2 - 8 s_c c}} {2 c},
+\end{equation}
+
+\noindent where the terms $b$ and $c$ are polynomial functions $f(s_m,\delta,s_c)$ (see Appendix \hl{X}). Finally, for a Mitochondrial compensatory locus, the threshold frequency of $y$ is favouring invasion of the $m$ compensatory allele is
+
+\begin{equation} \label{eq:qTildeM} 
+	\tilde{q}_y^{\text{M}} = \frac{s_c} {sc + (1 + s_m) (sm - \delta)}.
+\end{equation}
+
+\noindent Under additive fitness ($h_c = h_o = 1/2$), Eq(\ref{eq:qTildeAuto}) reduces to Eq(\ref{eq:qTildeM}).
+\bigskip
+
+Tracking frequencies of co-evolving alleles at two loci is analytically challenging, and we address the problem of concurrent sweeps at both loci in the \nameref{subsec:simulations} section. In our analytic results, we focus on two limiting scenarios where only one locus segregates at a time.
+
+
+%%%%%%%%%%%%%%%%
+\subsubsection*{Low compensatory mutation rate} 
+
+When the mutation rate at the compensatory locus, $v$, is sufficiently small, the appearance of compensatory alleles is slow relative to the timescale for successful invasion of the mutant $y$ allele. In this case, each locus will experience a selective sweep independently. Conditioned on 
+
+
+For convenience, we define the net selective advantage of the mutant $y$ allele as $s_{\delta} = s_m - s_o$, and assume that $s_m > s_o$.
+
+\subsubsection*{Slow compensatory dynamics} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Simulations} \label{subsec:simulations}
+
+blah 
+
+%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%
+%\bibliography{sexChromCoAdapt-bibliography}
+
+\end{document}

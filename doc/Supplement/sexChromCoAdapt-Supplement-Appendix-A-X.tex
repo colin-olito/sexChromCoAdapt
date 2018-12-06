@@ -66,12 +66,18 @@
 %\newcommand{\code}{\fontfamily{pcr}\selectfont}
 %\newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\def\mathbi#1{\textbf{\em #1}}
 
 %% Other Options
 
 % Change subsection numbering
 \renewcommand\thesubsection{\arabic{subsection})}
 \renewcommand\thesubsubsection{}
+
+% Turn off section numbering without disrupting hyperref
+\makeatletter
+\renewcommand\@seccntformat[1]{}
+\makeatother
 
 % Subsubsection Title Formatting
 \titleformat{\subsubsection}    
@@ -98,14 +104,14 @@
 \pagestyle{fancyplain}
 \makeatother
 %\lhead{\textit{Supplement to Olito \textit{et al.}. Coadaptation between the sex chromosomes. \textit{Targ.~Journ.}.\\}}
-\lhead{\textit{Supplement to Olito \textit{et al}. (2019). Targ.~J..}\\ }}
+\lhead{\textit{Supplement to Olito \textit{et al}. (2019). Targ.~J..}\\ }
 \rhead{\textit{Coadaptation between the sex chromosomes}\\ }
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 \addtolength{\headheight}{12pt}
 
 
-\section*{Appendix A: Development of the recursions}
+\section{Appendix A: Development of the recursions}
 \renewcommand{\theequation}{A\arabic{equation}}
 \titleformat{\subsubsection}    
 {\normalfont\fontsize{12pt}{17}\itshape}{\thesubsubsection}{12pt}{}
@@ -113,23 +119,242 @@
 %\setcounter{subsection}{0}  % reset counter 
 %\setcounter{equation}{0}  % reset counter 
 
-Here, we fully develop the system of recursion equations underlying each of the models described in the main text: ...
 
-\subsection*{Assumptions}
+Our models differ from standard selection models in two important ways: (i) mating is non-random (influenced by males' genotype at $\mathbf{Y}$, and (ii) the relative fitness of offspring depends on the parental genotypes rather than their own (i.e., selection in the current generation depends on genotypic frequencies in the previous generation). Because of these differences, the evolutionary dynamics of the two interacting loci must be expressed as systems of genotypic frequency recursions, with the specific structure of each model determined by the mode of inheritence of the compensatory locus. The structure of the models also makes general solutions analytically intractable when both loci have segregating mutant alleles at the same time. Here, we develop the system of recursion equations underlying the deterministic version of each of the models described in the main text as well as the eigenvalues for the relevant boundary equilibria used in subsequent analyses. For the deterministic models below, we assume sufficiently large population sizes that drift can be ignored, in addition to the major assumptions outlined in the main text. As in the main text, we describe the the Autosomal model in detail, and then provide more abbreviated summaries of the other models.
 
-Blah...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Autosomal Model}
+
+When the compensatory locus is autosomal, we can model the dynamics of the two interacting loci by tracking the frequency of mutant $y$ genotype, $q_{y}$, and each of the three autosomal genotypes at the compensatory locus ($F_{AA}$, $F_{Aa}$, $F_{aa}$). We begin with the recursion for $\mathbf{Y}$ locus. 
+
+Let $(1 - q_y)$ and $q_{y}$ equal the frequency of the wild-type ($Y$) and mutant ($y$) genotype among adult males prior to mating, with $w_{Y}^{g}$ and $w_{y}^{g}$ denoting the relative mating success of the two genotypes respectively. The genotypic frequencies among male gametes at mating are then 
+
+\begin{subequations}\begin{align} \label{eq:Auto-qg}
+	(1 - q^{g}_{y}) &= \frac{ (1 - q_y)w^{Y}_{g} }{\overline{w}_g} \\
+	q^{g}_{y}       &= \frac{ q_y w^{y}_{g} }{\overline{w}_g}, 
+\end{align}\end{subequations}
+
+where $\overline{w}_g = (1 - q_y)w^{Y}_{g} + q_y w^{y}_{g}$ is the average fitness of both genotypes with respect to mating success. The resulting genotypic frequencies among offspring after fertilization and viability selection depends on the parent genotypes. We now write the frequency of the three possible genotypes at the autosomal compensatory locus as $F_{AA}$, $F_{Aa}$, and $F_{aa}$. Let $w^{o}_{Y:AA}$, $w^{o}_{Y:Aa}$, and $w^{o}_{Y:aa}$ denote the relative fitness of offspring sired by a wild-type male with each of the three possible female genotypes, with $w^{o}_{y:AA}$, $w^{o}_{y:Aa}$, and $w^{o}_{y:aa}$ representing the same for matings involving mutant males. The genotypic frequencies among offspring after fertilization and selection are then
+
+\begin{subequations} \begin{align} 
+	(1 - q'_{y}) &= \frac{ (1 - q^{g}_{y}) (F_{AA} w^{o}_{Y:AA} + F_{Aa} w^{o}_{Y:Aa} + F_{aa} w^{o}_{Y:aa}) }{\overline{w}^{\mathbf{Y}}_o} \label{eq:Auto-qPr1} \\ 
+	q'_{y} &= \frac{ q^{g}_{y} (F_{AA} w^{o}_{y:AA} + F_{Aa} w^{o}_{Y:Aa} + F_{aa} w^{o}_{Y:aa}) }{\overline{w}^{\mathbf{Y}}_o}, \label{eq:Auto-qPr2} 
+\end{align}\end{subequations}
+
+\noindent where $\overline{w}^{\mathbf{Y}}_o$ represents mean offspring fitness, and is equal to the sum of the numerators of Eq(\ref{eq:Auto-qPr1}, \ref{eq:Auto-qPr2}).
+
+Recalling that $q^{g}_{y}$ denotes the frequency of the mutant $y$ genotype among male gametes, the corresponding recursions for the compensatory locus, $\mathbf{A}$, are
+
+\begin{subequations}\label{eq:Auto-ALocusRecursions} 
+	\begin{align} 
+		F'_{AA} &= \dfrac{ (1 - q^{g}_{y}) \bigg(F_{AA} w^{o}_{Y:AA} + \dfrac{F_{Aa}}{2} w^{o}_{Y:Aa} \bigg) (1 - q_a) + q^{g}_{y} \bigg(F_{AA} w^{o}_{y:AA} + \dfrac{F_{Aa}}{2} w^{o}_{y:Aa} \bigg) (1 - q_a)}{\overline{w}^{\mathbf{A}}_o} \label{eq:Auto-ARec1} \\ 
+		F'_{Aa} &= \Bigg( (1 - q^{g}_{y}) \Bigg[ \bigg( F_{AA} w^{o}_{Y:AA} + \dfrac{F_{Aa}}{2} w^{o}_{Y:Aa} \bigg) q_a + \bigg( F_{aa} w^{o}_{Y:aa} + \dfrac{F_{Aa}}{2} w^{o}_{Y:Aa} \bigg) (1 - q_a) \bigg] +\nonumber \\
+		&~~~~~~~~~~~~~~~q^{g}_{y} \Bigg[ \bigg( F_{AA} w^{o}_{y:AA} + \dfrac{F_{Aa}}{2} w^{o}_{y:Aa} \bigg) q_a	+ \bigg(F_{aa} w^{o}_{y:aa} + \dfrac{F_{Aa}}{2} w^{o}_{y:Aa} \bigg) (1 - q_a) \Bigg] \Bigg) \Bigg/ {\overline{w}^{\mathbf{A}}_o} \label{eq:Auto-ARec2}\\ 
+		F'_{aa} &= \dfrac{ (1 - q^{g}_{y}) \bigg( F_{aa} w^{o}_{Y:aa} + \dfrac{F_{Aa}}{2} w^{o}_{Y:Aa} \bigg) q_a + q^{g}_{y} \bigg(F_{aa} w^{o}_{y:aa} + \dfrac{F_{Aa}}{2} w^{o}_{y:Aa} \bigg) q_a}{\overline{w}^{\mathbf{A}}_o}, \label{eq:Auto-ARec3}
+	\end{align}
+\end{subequations}
+
+\noindent where $q_a = F_{aa} + F_{Aa}/2$, and $\overline{w}^{\mathbf{A}}_o$ is the sum of the numerators of Eqs(\ref{eq:Auto-ALocusRecursions}a-c).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Evolution of the \textbf{Y} locus}
+
+During the initial stage of a coevolutionary cycle (invasion and subsequent increase in the frequency of $y$ to fixation in a population fixed for the wild-type compensatory allele), the evolutionary dynamics of the $\mathbf{Y}$ locus remain largely unchanged regardless of where the compensatory locus is located in the genome. Substituting the fitness expressions defined in Table 1 of the main text, the recursion for the expected frequency of the mutant $y$ allele in the next generation for a population initially fixed for the wild-type allele ($q_a = 0)$ reduces to:
+
+\begin{equation} \label{eq:qPry}
+	q'_{y} = \frac{q_y (1 + s_m)(1 - s_o)}{1 + q_y (s_m (1 - s_o) - s_o)}.
+\end{equation}
+
+\noindent From Eq(\ref{eq:qPry}), the mutant $y$ chromosome can invade when $s_m - s_o(1 + s_m) > 0$. Under weak selection (dropping terms in $s_m s_o$), we see clearly that invasion of $y$ simply requires that $\delta = (s_m - s_o) > 0$, the increase in male mating success is greater than the loss of offspring viability. Under weak selection ($1 \gg s_m,s_o > 0$), the change in $q_y$ across a single generation can be approximated as
+
+\begin{equation} \label{eq:qPryApprox}
+	\Delta q_{y | q_a = 0}\approx \delta q_y (1 - q_y) + \mathbi{O}[\delta s_m] + \mathbi{O}[s_m^2],
+\end{equation}
+
+\noindent where $\delta = (s_m - s_o)$ is the difference in selection coefficients associated with male mating success ($s_m$) and offspring survival when mothers carry the wild-type $A$ allele ($s_o$). As we outline in \nameref{sec:Approximations}, we use this approximation extensively throughout our analytic results for the frequency trajectory of successfully invading $y$ alleles.
+\bigskip
+
+Similarly, the evolutionary trajectory of the mutant $y$ chromosome when the population is fixed for the compensatory allele remains unchanged, regardless of the genomic location of the compensatory locus. Under weak selection ($1 \gg s_m,s_c > 0$), the change in $q_y$ across a single generation can be approximated as
+
+\begin{equation} \label{eq:qPryCompFixedApprox}
+	\Delta q_{y|q_a = 1}\approx (s_m + s_c) q_y (1 - q_y) + \mathbi{O}[\delta s_m] + \mathbi{O}[s_m s_c].
+\end{equation}
+
+\noindent From Eq(\ref{eq:qPryCompFixedApprox}), we see that the rate of spread of the mutant $y$ chromosome is accelerated when the population is fixed for the compensatory allele. This makes intuitive sense because in this situation, there is no loss in offspring viability resulting from $[y:aa]$ matings, but there is for $[Y:aa]$ matings.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Evolution of the \textbf{A} locus}
+
+\hl{Unfortunately}, even for a population initially fixed for the mutant $y$ allele ($q_a = 1$), we cannot reduce the system of equations to a single recursion describing the frequency of the $a$ compensatory allele. \hl{After exploding my idea for approximating this using a standard selection model, I haven't been able to come up with a better alternative. Rather than work out increasingly strange approximations here, I think maybe the most prudent approach is to just simulate this (grr).} However, we can analyze the system of recursions to determine the threshold frequency of the mutant $y$ at which selection begins to favour invasion of the compensatory $a$ allele.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Invasion of autosomal compensatory mutation}
+
+To analyze the linear stability of the system of recursion equations (Eqs(\ref{eq:Auto-qPr2}, \ref{eq:Auto-ALocusRecursions}a-c) at specific equilibria, we first define the Jacobian matrix:
+
+\begin{equation}
+	\mathbb{J}_{\text{A}} = \left( \begin{array}{cccc} 
+		\dfrac{\partial  q'_y}{\partial q_y} & \dfrac{\partial  q'_y}{\partial F_{AA}} & \dfrac{\partial  q'_y}{\partial F_{Aa}} & \dfrac{\partial  q'_y}{\partial F_{aa}} \\ 
+		\dfrac{\partial  F'_{AA}}{\partial q_y} & \dfrac{\partial  F'_{AA}}{\partial F_{AA}} & \dfrac{\partial  F'_{AA}}{\partial F_{Aa}} & \dfrac{\partial  F'_{AA}}{\partial F_{aa}} \\ 
+		\dfrac{\partial  F'_{Aa}}{\partial q_y} & \dfrac{\partial  F'_{Aa}}{\partial F_{AA}} & \dfrac{\partial  F'_{Aa}}{\partial F_{Aa}} & \dfrac{\partial  F'_{Aa}}{\partial F_{aa}} \\ 
+		\dfrac{\partial  F'_{aa}}{\partial q_y} & \dfrac{\partial  F'_{aa}}{\partial F_{AA}} & \dfrac{\partial  F'_{aa}}{\partial F_{Aa}} & \dfrac{\partial  F'_{aa}}{\partial F_{aa}} \\ 
+	\end{array} \right)
+\end{equation}
+
+\noindent To determine when selection will favour the invasion compensatory $a$ allele, we evaluated the candidate leading eigenvalue associated with invasion at $\mathbf{A}$, $\lambda_{\mathbf{A}}$ at the boundary equilibrium where $q_a = 0$, and the $q_y$ is unspecified. Given these initial frequencies, and the fitness expressions provided in Table 1,
+
+\begin{equation} \label{eq:Lambda-a}
+	\lambda_{\mathbf{A}|\hat{q}_a = 0} = \frac{2(q_y s_m + 1) - h_c s_c(1 - q_y) - q_y s_o (1 + h_o)(1 + s_m)} {2 q_y (s_m (1 - s_o) - s_o) + 2}.
+\end{equation}
+
+\noindent Solving for $q_y$ yields the threshold frequency of the mutant $y$ allele at which selection begins to favour the invasion of the $a$ allele
+
+\begin{equation} \label{eq:aInvDelta-threshold}
+	\tilde{q}_y^{\text{Auto}} = \frac{h_c s_c} {h_c s_c + (s_m - \delta)(1 - h_o)(1+s_m)}.
+\end{equation}
+
+
 
 \newpage{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The X-linked Model}
+
+When the compensatory locus is located on the X chromosomes, it is necessary to track the genotypic frequencies of all seven possible pairings of the sex chromosomes: $XY$, $Xy$, $xY$, and $xy$ for males, and $XX$, $Xx$, and $xx$ for females. The frequencies of the relevant chromosomes sex chromosomes among male gamete contributed by each male genotype are
+
+\begin{subequations}\begin{align} \label{eq:Fg-Xlinked}
+	F_{XY}^{g} &= \frac{F_{XY}w^{Y}_{g}}{\overline{w}_g} \\
+	F_{Xy}^{g} &= \frac{F_{Xy}w^{Y}_{g}}{\overline{w}_g} \\
+	F_{xY}^{g} &= \frac{F_{xY}w^{Y}_{g}}{\overline{w}_g} \\
+	F_{xy}^{g} &= \frac{F_{xy}w^{Y}_{g}}{\overline{w}_g}, 
+\end{align}\end{subequations}
+
+\noindent where, $\overline{w}_g$ is now the sum of the numerators of Eqs(\ref{eq:Fg-Xlinked}). For simplicity, we also define the overall frequency of the $Y$ and $y$ chromosomes among male gametes as 
+
+ \begin{subequations}\begin{align} \label{eq:qg-Xlinked}
+	F_{\cdot Y}^{g} &= \frac{(F_{XY} + F_{xY})w^{Y}_{g}}{\overline{w}_g} \\
+	F_{\cdot y}^{g} &= \frac{(F_{Xy} + F_{xy})w^{y}_{g}}{\overline{w}_g}. 
+\end{align}\end{subequations}
+
+The genotypic frequencies among male offspring after fertilization and selection can now be described by the following system of recursions
+
+\begin{subequations}\label{eq:X-MaleRecursions} 
+	\begin{align} 
+		F'_{XY} &= \dfrac{ F_{\cdot Y}^g \bigg(F_{XX} w^{o}_{Y:XX} + \dfrac{F_{Xx}}{2} w^{o}_{Y:Xx} \bigg)}{\overline{w}^{\mathbf{X}}_{m}} \label{eq:X-XYRec1} \\ 
+		F'_{Xy} &= \dfrac{ F_{\cdot y}^g \bigg(F_{XX} w^{o}_{y:XX} + \dfrac{F_{Xx}}{2} w^{o}_{y:Xx} \bigg)}{\overline{w}^{\mathbf{X}}_{m}} \label{eq:X-XyRec2} \\ 
+		F'_{xY} &= \dfrac{ F_{\cdot Y}^g \bigg(F_{xx} w^{o}_{Y:xx} + \dfrac{F_{Xx}}{2} w^{o}_{Y:Xx} \bigg)}{\overline{w}^{\mathbf{X}}_{m}} \label{eq:X-xYRec3} \\ 
+		F'_{xy} &= \dfrac{ F_{\cdot y}^g \bigg(F_{xx} w^{o}_{y:xx} + \dfrac{F_{Xx}}{2} w^{o}_{y:Xx} \bigg)}{\overline{w}^{\mathbf{X}}_{m}}, \label{eq:X-xyRec4}
+	\end{align}
+\end{subequations}
+
+\noindent where $\overline{w}^{\mathbf{X}}_{m}$ is the sum of the numerators of Eqs(\ref{eq:X-MaleRecursions}a-d). The genotypic frequencies among female offspring after fertilization and selection are the3n
+
+\begin{subequations}\label{eq:X-FemaleRecursions} 
+	\begin{align} 
+		F'_{XX} &= \dfrac{ F_{XY}^g \bigg(F_{XX} w^{o}_{Y:XX} + \dfrac{F_{Xx}}{2} w^{o}_{Y:Xx} \bigg) + F_{Xy}^g \bigg(F_{XX} w^{o}_{y:XX} + \dfrac{F_{Xx}}{2} w^{o}_{y:Xx} \bigg)}{\overline{w}^{\mathbf{X}}_{f}} \label{eq:X-XxRec1} \\ 
+		F'_{Xx} &= \dfrac{1}{\overline{w}^{\mathbf{X}}_{f}} \Bigg[F_{XY}^g \bigg(F_{xx} w^{o}_{Y:xx} + \dfrac{F_{Xx}}{2} w^{o}_{Y:Xx} \bigg) + F_{xY}^g \bigg(F_{XX} w^{o}_{Y:XX} + \dfrac{F_{Xx}}{2} w^{o}_{Y:Xx} \bigg) + \nonumber\\
+		&~~~~~~~~~~~~F_{Xy}^g \bigg(F_{xx} w^{o}_{y:XX} + \dfrac{F_{Xx}}{2} w^{o}_{y:Xx} \bigg) + F_{xy}^g \bigg(F_{XX} w^{o}_{y:XX} + \dfrac{F_{Xx}}{2} w^{o}_{y:Xx} \bigg) \Bigg]  \label{eq:X-XxRec2} \\ 
+		F'_{xx} &= \dfrac{ F_{xY}^g \bigg(F_{xx} w^{o}_{Y:xx} + \dfrac{F_{Xx}}{2} w^{o}_{Y:Xx} \bigg) + F_{xy}^g \bigg(F_{xx} w^{o}_{y:xx} + \dfrac{F_{Xx}}{2} w^{o}_{y:Xx} \bigg)}{\overline{w}^{\mathbf{X}}_{f}}, \label{eq:X-xxRec3}
+	\end{align}
+\end{subequations}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Invasion of an X-linked compensatory mutation}
+
+To analyze the linear stability of the system of recursion equations (Eqs(\ref{eq:X-MaleRecursions}a-d, \ref{eq:X-FemaleRecursions}a-c) at specific equilibria, we first define the Jacobian matrix:
+
+\begin{equation}
+	\mathbb{J}_{\text{X}} = \left( \begin{array}{ccccccc} 
+		\dfrac{\partial  F'_{XY}}{\partial F_{XY}} & \dfrac{\partial  F'_{XY}}{\partial F_{Xy}} & \dfrac{\partial  F'_{XY}}{\partial F_{xY}} & \dfrac{\partial  F'_{XY}}{\partial F_{aa}} & \dfrac{\partial  F'_{XY}}{\partial F_{XX}} & \dfrac{\partial  F'_{XY}}{\partial F_{Xx}} & \dfrac{\partial  F'_{XY}}{\partial F_{xx}} \\ 
+		\dfrac{\partial  F'_{Xy}}{\partial F_{XY}} & \dfrac{\partial  F'_{Xy}}{\partial F_{Xy}} & \dfrac{\partial  F'_{Xy}}{\partial F_{xY}} & \dfrac{\partial  F'_{Xy}}{\partial F_{aa}} & \dfrac{\partial  F'_{Xy}}{\partial F_{XX}} & \dfrac{\partial  F'_{Xy}}{\partial F_{Xx}} & \dfrac{\partial  F'_{Xy}}{\partial F_{xx}} \\ 
+		\dfrac{\partial  F'_{xY}}{\partial F_{XY}} & \dfrac{\partial  F'_{xY}}{\partial F_{Xy}} & \dfrac{\partial  F'_{xY}}{\partial F_{xY}} & \dfrac{\partial  F'_{xY}}{\partial F_{aa}} & \dfrac{\partial  F'_{xY}}{\partial F_{XX}} & \dfrac{\partial  F'_{xY}}{\partial F_{Xx}} & \dfrac{\partial  F'_{xY}}{\partial F_{xx}} \\ 
+		\dfrac{\partial  F'_{xy}}{\partial F_{XY}} & \dfrac{\partial  F'_{xy}}{\partial F_{Xy}} & \dfrac{\partial  F'_{xy}}{\partial F_{xY}} & \dfrac{\partial  F'_{xy}}{\partial F_{aa}} & \dfrac{\partial  F'_{xy}}{\partial F_{XX}} & \dfrac{\partial  F'_{xy}}{\partial F_{Xx}} & \dfrac{\partial  F'_{xy}}{\partial F_{xx}} \\ 
+		\dfrac{\partial  F'_{XX}}{\partial F_{XY}} & \dfrac{\partial  F'_{XX}}{\partial F_{Xy}} & \dfrac{\partial  F'_{XX}}{\partial F_{xY}} & \dfrac{\partial  F'_{XX}}{\partial F_{aa}} & \dfrac{\partial  F'_{XX}}{\partial F_{XX}} & \dfrac{\partial  F'_{XX}}{\partial F_{Xx}} & \dfrac{\partial  F'_{XX}}{\partial F_{xx}} \\ 
+		\dfrac{\partial  F'_{Xx}}{\partial F_{XY}} & \dfrac{\partial  F'_{Xx}}{\partial F_{Xy}} & \dfrac{\partial  F'_{Xx}}{\partial F_{xY}} & \dfrac{\partial  F'_{Xx}}{\partial F_{aa}} & \dfrac{\partial  F'_{Xx}}{\partial F_{XX}} & \dfrac{\partial  F'_{Xx}}{\partial F_{Xx}} & \dfrac{\partial  F'_{Xx}}{\partial F_{xx}} \\ 
+		\dfrac{\partial  F'_{xx}}{\partial F_{XY}} & \dfrac{\partial  F'_{xx}}{\partial F_{Xy}} & \dfrac{\partial  F'_{xx}}{\partial F_{xY}} & \dfrac{\partial  F'_{xx}}{\partial F_{aa}} & \dfrac{\partial  F'_{xx}}{\partial F_{XX}} & \dfrac{\partial  F'_{xx}}{\partial F_{Xx}} & \dfrac{\partial  F'_{xx}}{\partial F_{xx}} \\ 
+	\end{array} \right)
+\end{equation}
+
+\noindent To determine when selection will favour invasion of the compensatory $x$ allele, we evaluated the candidate leading eigenvalue associated with invasion at $\mathbf{X}$, $\lambda_{\mathbf{X}}$ at the boundary equilibrium where $q_x = 0$, and the $q_y$ is arbitrary. Given these initial frequencies, and the fitness expressions provided in Table 1, $\lambda_{\mathbf{X}|\hat{q}_x = 0}$ is a large polynomial expression (see the accompanying Mathematica notebook in Appendix \hl{X}, where this result is derived). However, under additive fitness effects at $\mathbf{X}$ ($h_c = h_o = 1/2$), we can still solve $\lambda_{\mathbf{X}|\hat{q}_x = 0} - 1 = 0$ for $q_y$ to give the threshold frequency of the mutant $y$ chromosome at which selection will begin to favour the mutant $x$ compensatory allele. Although the solution is still complicated, it follows the general form
+
+\begin{equation} \label{eq:xInvDelta-threshold}
+	\tilde{q}_y^{\text{X}} = \frac{b - \sqrt{b^2 - 8 s_c c}} {2 c}
+\end{equation}
+
+\noindent (see Eq(\hl{6}) in the main text), where 
+
+\begin{subequations}
+	\begin{align}
+		b &= s_m (2 + s_m (2 - s_m(1 - s_m))) - \delta (2 + s_m + s_m^2 + 2 s_m^3) + \delta^2(1 + s_m)^2 + s_c (2 + s_m^2 - \delta(1 + s_m)) \\
+		c &= (s_c + s_m + 3 s_m^2 - 3 \delta(1 + s_m)) (s_m^2 - \delta(1 + s_m)).
+	\end{align}
+\end{subequations}
+
+\noindent 
+
+
+\newpage{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Mitochondrial Model}
+
+With a mitochondrial compensatory locus, the recursions simplify considerably because there are only two possible genotypes for each locus. The frequencies of the wild-type and mutant Y-chromosomes in the next generation are 
+
+\begin{subequations}\label{eq:Mito-YLocusRecursions} 
+	\begin{align} 
+		(1 - q'_{y}) &= \frac{(1 - q^g_{y})\big((1 - q_m)w^o_{Y:M} + q_m w^o_{Y:m} \big)} {\overline{w}^{\mathbf{M}}_{o,y}} \label{eq:Mito-YRec1} \\ 
+		q'_{y} &= \frac{q^g_{y}\big((1 - q_m)w^o_{y:M} + q_m w^o_{y:m} \big)} {\overline{w}^{\mathbf{M}}_{o,y}} \label{eq:Mito-yRec2}
+	\end{align}
+\end{subequations}
+
+\noindent where $q^g_y$ is as defined in Eq(\ref{eq:Auto-qg}), and $\overline{w}^{\mathbf{M}}_{o,y}$ is the sum of the numerators of Eqs(\ref{eq:Mito-YLocusRecursions}a-b)
+
+\begin{subequations}\label{eq:Mito-MLocusRecursions} 
+	\begin{align} 
+		q'_{m} &= \frac{(1 - q^g_{y}) ((1 - q_m) w^o_{Y:M}) + q^g_y((1 - q_m) w^o_{y:M})} {\overline{w}^{\mathbf{M}}_{o,m}} \label{eq:Mito-MRec1} \\
+		q'_{m} &= \frac{(1 - q^g_{y}) (q_m w^o_{Y:m}) + q^g_y(q_m w^o_{y:m})} {\overline{w}^{\mathbf{M}}_{o,m}}, \label{eq:Mito-mRec2}
+	\end{align}
+\end{subequations}
+
+\noindent and  $\overline{w}^{\mathbf{M}}_{o,m}$ is the sum of the numerators of Eqs(\ref{eq:Mito-MLocusRecursions}a-b). The deterministic allele frequency trajectories, however, can be described by Eqs(\ref{eq:Mito-yRec2} \& \ref{eq:Mito-mRec2}) alone.
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Invasion of a Mitochondrial compensatory mutation}
 
+To analyze the linear stability of the system of recursion equations (Eqs(\ref{eq:X-MaleRecursions}a-d, \ref{eq:X-FemaleRecursions}a-c) at specific equilibria, we first define the Jacobian matrix:
+
+\begin{equation}
+	\mathbb{J}_{\text{M}} = \left( \begin{array}{cc} 
+		\dfrac{\partial q'_{y}}{\partial q_{y}} & \dfrac{\partial q'_{y}}{\partial q_{m}} \\ 
+		\dfrac{\partial q'_{m}}{\partial q_{y}} & \dfrac{\partial q'_{m}}{\partial q_{m}} \\ 
+	\end{array} \right)
+\end{equation}
+
+\noindent As before, we determine when selection will favour the invasion compensatory $m$ allele by evaluating the candidate leading eigenvalue associated with invasion at $\mathbf{M}$ for a population initially fixed for the $M$ allele, $\lambda_{\mathbf{M}}$, at the boundary equilibrium where $q_m = 0$, and $q_y$ is arbitrary. Given these initial frequencies, and the fitness expressions provided in Table 1, $\lambda_{\mathbf{M}|\hat{q}_m -1 = 0}$ is 
+
+\begin{equation} \label{eq:mInvDelta-threshold}
+	\tilde{q}_y^{\text{M}} = \frac{s_c} {s_c (1 + s_m)(s_m - \delta)}
+\end{equation}
+
+\noindent which appears as Eq(\hl{7}) in the main text.
+
+
+
+\noindent 
+
+\newpage{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Appendix B: Approximations....}
+\section{Appendix B: Approximations} \label{sec:Approximations}
 \renewcommand{\theequation}{B\arabic{equation}}
 \setcounter{equation}{0}
 \renewcommand{\thefigure}{B\arabic{figure}}
 \setcounter{figure}{0}
+
+
 
 
 
@@ -166,7 +391,7 @@ Blah...
 %%%%%%%%%%%%%%%%%%%%%
 % Bibliography
 %%%%%%%%%%%%%%%%%%%%%
-\bibliography{sexChromCoAdapt-Supplement-bibliography}
+%\bibliography{sexChromCoAdapt-Supplement-bibliography}
 
 
 
