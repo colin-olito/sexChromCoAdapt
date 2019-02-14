@@ -27,7 +27,7 @@
 #' @param Fm     2 x 3 Matrix of adult male genotypic frequencies
 #' @param W_y.g  Fitness expressions for male gametes (i.e., fitness effects associated with the wild-type and mutant Y chromosomes)
 #' @export
-maleGameteSel  <-  function(Fm, W_y.g) {
+maleGameteSelXLinked  <-  function(Fm, W_y.g) {
 	(Fm * c(1, W_y.g, 1, W_y.g)) / sum((Fm * c(1, W_y.g, 1, W_y.g)))
 }
 
@@ -44,7 +44,7 @@ maleGameteSel  <-  function(Fm, W_y.g) {
 #' @export
 	# males: c(XY, Xy, xY, xy)
 	# females: c(XX, Xx, xx)
-maleOffspringSel  <-  function(Fm.g, Ff, W_c, W_o) {
+maleOffspringSelXLinked  <-  function(Fm.g, Ff, W_c, W_o) {
 				Fm_o  <-  c((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*(Fm.g[1] + Fm.g[3]), 
 							(Ff[1]*W_o[1] + (Ff[2]/2)*W_o[2])*(Fm.g[2] + Fm.g[4]),
 							(Ff[3]*W_c[3] + (Ff[2]/2)*W_c[2])*(Fm.g[1] + Fm.g[3]),
@@ -52,7 +52,14 @@ maleOffspringSel  <-  function(Fm.g, Ff, W_c, W_o) {
 						 )
 				Fm_o/sum(Fm_o)
 }
-femaleOffspringSel  <-  function(Fm.g, Ff, W_c, W_o) {
+maleOffspringMutXLinked  <-  function(O_m, uy, ux) {
+						  c(O_m[1]*(1 - uy)*(1 - ux),
+							O_m[1]*uy*(1 - ux) + O_m[2]*(1 - ux),
+							O_m[1]*(1 - uy)*ux + O_m[3]*(1 - uy),
+							O_m[1]*uy*ux + O_m[3]*uy + O_m[4]
+						 )
+}
+femaleOffspringSelXLinked  <-  function(Fm.g, Ff, W_c, W_o) {
 				Ff_o  <-  c((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*Fm.g[1] + (Ff[1]*W_o[1] + (Ff[2]/2)*W_o[2])*Fm.g[2], 
 							(Ff[3]*W_c[3] + (Ff[2]/2)*W_c[2])*Fm.g[1] + (Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*Fm.g[3] + 
 							 (Ff[3]*W_o[3] + (Ff[2]/2)*W_o[2])*Fm.g[2] + (Ff[1]*W_o[1] + (Ff[2]/2)*W_o[2])*Fm.g[4], 
@@ -60,6 +67,63 @@ femaleOffspringSel  <-  function(Fm.g, Ff, W_c, W_o) {
 							)
 				Ff_o/sum(Ff_o)
 }
+femaleOffspringMutXLinked  <-  function(O_f, ux) {
+						  c(O_f[1]*(1 - ux),
+							O_f[1]*ux + (O_f[2]/2) + (O_f[2]/2)*(1 - ux),
+							(O_f[2]/2)*ux + O_f[3]
+							)
+}
+
+
+
+
+
+
+	# males: c(XY, Xy, xY, xy)
+	# females: c(XX, Xx, xx)
+maleOffspringMutSelXLinked  <-  function(Fm.g, Ff, W_c, W_o, uy, ux) {
+				Fm_o  <-  c(
+							((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*(1 - ux)) * ((Fm.g[1] + Fm.g[3])*(1 - uy)), 
+							
+							((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*(1 - ux)) * ((Fm.g[1] + Fm.g[3])*uy) +
+							((Ff[1]*W_o[1] + (Ff[2]/2)*W_o[2])*(1 - ux)) * (Fm.g[2] + Fm.g[4]),
+							
+							((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*ux)       * ((Fm.g[1] + Fm.g[3])*(1 - uy)) +
+							((Ff[3]*W_c[3] + (Ff[2]/2)*W_c[2])*(1 - ux)) * ((Fm.g[1] + Fm.g[3])*(1 - uy)),
+							
+							((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*ux) * ((Fm.g[1] + Fm.g[3])*uy) +
+							((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*ux) * (Fm.g[2] + Fm.g[4]) + 
+							 (Ff[3]*W_o[3] + (Ff[2]/2)*W_o[2])     * ((Fm.g[1] + Fm.g[3])*uy) +
+							 (Ff[3]*W_o[3] + (Ff[2]/2)*W_o[2])     * (Fm.g[2] + Fm.g[4])
+						 )
+				Fm_o/sum(Fm_o)
+}
+
+	# males: c(XY, Xy, xY, xy)
+	# females: c(XX, Xx, xx)
+
+
+femaleOffspringMutSelXLinked  <-  function(Fm.g, Ff, W_c, W_o, ux) {
+				Ff_o  <-  c(
+							(((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*(1 - ux)) * (Fm.g[1]*(1 - ux))) + 
+							(((Ff[1]*W_o[1] + (Ff[2]/2)*W_o[2])*(1 - ux)) * (Fm.g[2]*(1 - ux))), 
+
+							(((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*ux)       * (Fm.g[1]*(1 - ux))) + 
+							(((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*(1 - ux)) * (Fm.g[1]*ux)) + 
+							(((Ff[1]*W_o[1] + (Ff[2]/2)*W_o[2])*ux)       * (Fm.g[2]*(1 - ux))) +
+							(((Ff[1]*W_o[1] + (Ff[2]/2)*W_o[2])*(1 - ux)) * (Fm.g[2]*ux)) +
+							((Ff[3]*W_c[3] + (Ff[2]/2)*W_c[2]) * (Fm.g[1]*(1 - ux))) + ((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*(1 - ux))*Fm.g[3] + 
+							((Ff[3]*W_o[3] + (Ff[2]/2)*W_o[2]) * (Fm.g[2]*(1 - ux))) + ((Ff[1]*W_o[1] + (Ff[2]/2)*W_o[2])*(1 - ux))*Fm.g[4], 
+
+							(((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*ux) * (Fm.g[1]*ux)) + 
+							(((Ff[1]*W_o[1] + (Ff[2]/2)*W_o[2])*ux) * (Fm.g[2]*ux)) +
+							((Ff[3]*W_c[3] + (Ff[2]/2)*W_c[2]) * (Fm.g[1]*ux)) + ((Ff[1]*W_c[1] + (Ff[2]/2)*W_c[2])*ux)*Fm.g[3] + 
+							((Ff[3]*W_o[3] + (Ff[2]/2)*W_o[2]) * (Fm.g[2]*ux)) + ((Ff[1]*W_o[1] + (Ff[2]/2)*W_o[2])*ux)*Fm.g[4] +
+							 ((Ff[3]*W_c[3] + (Ff[2]/2)*W_c[2]) * Fm.g[3]) + ((Ff[3]*W_o[3] + (Ff[2]/2)*W_o[2])*Fm.g[4])
+							)
+				Ff_o/sum(Ff_o)
+}
+
 
 #' @title Threshold y frequency for invasion of compensatory allele 
 #' @param sm     Selection coefficient for mutant y chromosome
@@ -181,13 +245,13 @@ yXLinkedInvadeFwdSim  <-  function(N = N, sm = sm, delta = delta, ho = ho, sc = 
 
 			## Step through recursions:
 			# 1) Calculate frequency of mutant Y among male gametes
-			Fm.g  <-  maleGameteSel(Fm=Fm, W_y.g=W_y.g)
+			Fm.g         <-  maleGameteSelXLinked(Fm=Fm, W_y.g=W_y.g)
 			# 2) Mating and selection
-			E.Fm     <-  maleOffspringSel(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
-			E.Ff     <-  femaleOffspringSel(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
+			E.Fm         <-  maleOffspringSelXLinked(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
+			E.Ff         <-  femaleOffspringSelXLinked(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
 			# 4) Expected frequencies in offspring, after selection
-			E.qy[gen+1]     <-  sum(E.Fm[c(2,4)])
-			E.qx[gen+1]     <-  (sum(E.Fm[3:4]) + 2*sum(E.Ff[3] + E.Ff[2]/2))/3
+			E.qy[gen+1]  <-  sum(E.Fm[c(2,4)])
+			E.qx[gen+1]  <-  (sum(E.Fm[3:4]) + 2*sum(E.Ff[3] + E.Ff[2]/2))/3
 			# 5) Realized frequencies in adults
 			Fm           <-  as.vector(rmultinom(n=1, size=N/2, prob=E.Fm)/(N/2))
 			qy.t[gen+1]  <-  sum(Fm[c(2,4)])
@@ -255,10 +319,10 @@ yXLinkedInvadeFwdSim  <-  function(N = N, sm = sm, delta = delta, ho = ho, sc = 
 
 			## Step through recursions:
 			# 1) Calculate frequency of mutant Y among male gametes
-			Fm.g  <-  maleGameteSel(Fm=Fm, W_y.g=W_y.g)
+			Fm.g  <-  maleGameteSelXLinked(Fm=Fm, W_y.g=W_y.g)
 			# 2) Mating and selection
-			E.Fm     <-  maleOffspringSel(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
-			E.Ff     <-  femaleOffspringSel(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
+			E.Fm  <-  maleOffspringSelXLinked(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
+			E.Ff  <-  femaleOffspringSelXLinked(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
 			# 4) Expected frequencies in offspring, after selection
 			E.qy  <-  sum(E.Fm[c(2,4)])
 			E.qx  <-  (sum(E.Fm[3:4]) + 2*sum(E.Ff[3] + E.Ff[2]/2))/3
@@ -379,42 +443,22 @@ yXLinkedCoEvolCycle  <-  function(N = N, sm = sm, ho = ho, delta = delta, hc = h
 	gen  <-  1
 	while(qy.t[gen] < 1 | qx.t[gen] < 1) {
 
-		## Step through recursions:
-		# 1) Mutation
-		mutateY  <-  runif(1) <= uy
-		mutateX  <-  runif(1) <= ux
-		if(mutateY & qy.t[gen] < 1) {
-			mutant  <-  c(1:4)[as.vector(rmultinom(n=1, size=1, prob=Fm)) == 1]
-			if(any(mutant == c(1,3))) {
-				Fm[mutant]      <-  Fm[mutant] - (2/N)
-				Fm[mutant + 1]  <-  Fm[mutant + 1] + (2/N)
-			}
-		}
-		if(mutateX) {
-			fMut     <-  rbinom(1, 1, 2/3)
-			if(fMut == 1) {
-				prob    <-  Ff*c(1,1/2,0)/sum(Ff*c(1,1/2,0))
-				mutant  <-  c(1:3)[as.vector(rmultinom(n=1, size=1, prob=prob)) == 1]
-				Ff[mutant]      <-  Ff[mutant] - (2/N)
-				Ff[mutant + 1]  <-  Ff[mutant + 1] + (2/N)
-			}
-			if(fMut == 0) {
-				mutant  <-  c(1:4)[as.vector(rmultinom(n=1, size=1, prob=Fm)) == 1]
-				if(any(mutant == c(1,2))) {
-					Fm[mutant]      <-  Fm[mutant] - (2/N)
-					Fm[mutant + 2]  <-  Fm[mutant + 1] + (2/N)
-				}
-			}
-		}
-		# 2) Calculate frequency of mutant Y among male gametes
-		Fm.g  <-  maleGameteSel(Fm=Fm, W_y.g=W_y.g)
-		# 3) Mating and selection
-		E.Fm     <-  maleOffspringSel(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
-		E.Ff     <-  femaleOffspringSel(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
-		# 4) Expected frequencies in offspring, after selection
-		E.qy[gen+1]     <-  sum(E.Fm[c(2,4)])
-		E.qx[gen+1]     <-  (sum(E.Fm[3:4]) + 2*sum(E.Ff[3] + E.Ff[2]/2))/3
-		# 5) Realized frequencies in adults
+	# males: c(XY, Xy, xY, xy)
+	# females: c(XX, Xx, xx)
+
+		# 1) Calculate frequency of mutant Y among male gametes
+		Fm.g         <-  maleGameteSelXLinked(Fm=Fm, W_y.g=W_y.g)
+		# 2) Mating, mutation, selection
+#		E.Fm         <-  maleOffspringSelXLinked(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
+#		E.Fm         <-  maleOffspringMutXLinked(O_m=E.Fm, uy=uy, ux=ux) 
+		E.Fm         <-  maleOffspringMutSelXLinked(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o, uy=uy, ux=ux)
+#		E.Ff         <-  femaleOffspringSelXLinked(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
+#		E.Ff         <-  femaleOffspringMutXLinked(O_f=E.Ff, ux=ux)
+		E.Ff         <-  femaleOffspringMutSelXLinked(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o, ux=ux)
+		# 3) Expected frequencies in offspring, after selection
+		E.qy[gen+1]  <-  sum(E.Fm[c(2,4)])
+		E.qx[gen+1]  <-  (sum(E.Fm[3:4]) + 2*sum(E.Ff[3] + E.Ff[2]/2))/3
+		# 4) Realized frequencies in adults
 		Fm           <-  as.vector(rmultinom(n=1, size=N/2, prob=E.Fm)/(N/2))
 		qy.t[gen+1]  <-  sum(Fm[c(2,4)])
 		Ff           <-  as.vector(rmultinom(n = 1, size = N/2, prob = E.Ff)/(N/2))
@@ -441,6 +485,7 @@ yXLinkedCoEvolCycle  <-  function(N = N, sm = sm, ho = ho, delta = delta, hc = h
 				"sc"           =  sc,
 				"qcrit.y"      =  qcrit.y,
 				"qcrit.x"      =  qcrit.x,
+				"qyTilde"      =  qyTilde,
 				"qy.t"         =  qy.t[1:gen-1],
 				"E.qy"         =  E.qy[1:gen-1],
 				"qx.t"         =  qx.t[1:gen-1],
@@ -462,18 +507,25 @@ return(res)
 #' X-LINKED compensatory mutations 
 #' 
 #' @title makeDataXLinkedInv
+#' @title makeDataYAutoInv
+#' @param reps       How many replicate simulations will be run
 #' @param N          Population size
 #' @param sm         Selection favouring mutant y male gametes
-#' @param delta.vals Difference between sm and selection coefficient for selection against offspring 
+#' @param ho.vals    Values of dominace coefficients for selection against offspring resulting from 
+#'                   matings between mutant males and wild-type females to be explored
+#' @param delta      Difference between sm and selection coefficient for selection against offspring 
 #'                   resulting from matings between mutant y fathers and wild-type compensatory mothers.
 #'                   (delta = sm - so)
-#' @param sc.vals    Cost of compensation selection coefficient against offspring resulting from matings
-#'                   between wild-type fathers and mothers with mutant comensatory allele
-#' @export#' @seealso `offFreq`, `findEqFreqs`, `x.1`, ...
+#' @param hc.vals    Values of dominace coefficients for selection against offspring resulting from 
+#' 					 matings between wild-type males and mutant females to be explored
+#' @param sc        Cost of compensation selection coefficient against offspring resulting from matings
+#'                  between wild-type fathers and mothers with mutant comensatory allele
+#' @export
+#' @seealso
 #' @author Colin Olito
-makeDataYAutoInv  <-  function(reps = reps, N = N, sm = sm, 
-							   ho = ho.vals, delta = delta, 
-							   hc = hc.vals, sc = sc) {
+makeDataYXLinkedInv  <-  function(reps = reps, N = N, sm = sm, 
+								  ho.vals = ho.vals, delta = delta, 
+								  hc.vals = hc.vals, sc = sc) {
 
 	len.h  <-  length(ho.vals)
 
@@ -483,9 +535,14 @@ makeDataYAutoInv  <-  function(reps = reps, N = N, sm = sm,
 	qCrit_x    <-  c()
 	qyTilde    <-  c()
 
+	print('Running Replicate Simulations for X-linked Model')
 	for(i in 1:len.h) {
+	cat("\n")
+	print(paste("Running dominance value", i, "/",len.h))
+	pb   <-  txtProgressBar(min=0, max=reps, style=3)
+	setTxtProgressBar(pb, 0)
 		nyInvade  <-  0
-		naInvade  <-  0
+		nxInvade  <-  0
 		for(n in 1:reps) {
 			yInvData  <-  yXLinkedInvadeFwdSim(N = N, sm = sm, 
 											   ho = ho.vals[i], delta = delta, 
@@ -496,11 +553,12 @@ makeDataYAutoInv  <-  function(reps = reps, N = N, sm = sm,
 			xInvData  <-  yXLinkedInvadeFwdSim(N = N, sm = sm, 
 											   ho = ho.vals[i], delta = delta, 
 											   hc = hc.vals[i], sc = sc, 
-											   yInvade = TRUE, Fii.init = Fii.init,
-											   aInvade = FALSE, qy.init = 1, 
+											   yInvade = FALSE, Fii.init = Fii.init,
+											   xInvade = TRUE, qy.init = 1, 
 											   saveTrajectories = FALSE)
 			nyInvade  <-  nyInvade + as.numeric(is.numeric(yInvData$qyInv))
-			nxInvade  <-  nxInvade + as.numeric(is.numeric(xInvData$qaInv))
+			nxInvade  <-  nxInvade + as.numeric(is.numeric(xInvData$qxInv))
+			setTxtProgressBar(pb, n)
 		}
 		pInvade_y[i]  <-  nyInvade/reps
 		pInvade_x[i]  <-  nxInvade/reps
@@ -510,18 +568,306 @@ makeDataYAutoInv  <-  function(reps = reps, N = N, sm = sm,
 	}
 	# compile data as dataframe
 	data  <-  data.frame(
-						 "sm"         = rep(sm, times=len.h),
-						 "delta"      = rep(delta, times=len.h),
-						 "sc"         = rep(sc, times=len.h),
-						 "ho"         = ho.vals,
+						 "sm"         =  rep(sm,    times=len.h),
+						 "delta"      =  rep(delta, times=len.h),
+						 "sc"         =  rep(sc,    times=len.h),
+						 "ho"         =  ho.vals,
 						 "hc"         =  hc.vals,
-						 "pInvade_y"  = pInvade_y,
+						 "pInvade_y"  =  pInvade_y,
 						 "pInvade_x"  =  pInvade_x,
 						 "qCrit_y"    =  qCrit_y,
 						 "qCrit_x"    =  qCrit_x,
 						 "qyTilde"    =  qyTilde
 						)
 	# Write data to file
-	filename  <-  paste("./output/data/simData/dataYXLinkedInv", "_sm", sm, "_delta", delta, "_sc", sc, "_reps", reps, ".csv", sep="")	
+	filename  <-  paste("./output/data/simData/dataYXLinkedInv", "_sm", sm, "_delta", delta, "_sc", sc, "_N", N, "_reps", reps, ".csv", sep="")	
 	write.csv(data, file=filename)
 }
+
+
+
+
+
+
+
+
+#' Run replicate stochastic simulation to generate a data set for plotting
+#' the Time To fixation for invasion of mutant y and
+#' X-LINKED compensatory mutations 
+#' 
+#' @title makeDataXLinkedInv
+#' @title makeDataYAutoInv
+#' @param reps       How many replicate simulations will be run
+#' @param N          Population size
+#' @param sm         Selection favouring mutant y male gametes
+#' @param ho.vals    Values of dominace coefficients for selection against offspring resulting from 
+#'                   matings between mutant males and wild-type females to be explored
+#' @param delta      Difference between sm and selection coefficient for selection against offspring 
+#'                   resulting from matings between mutant y fathers and wild-type compensatory mothers.
+#'                   (delta = sm - so)
+#' @param hc.vals    Values of dominace coefficients for selection against offspring resulting from 
+#' 					 matings between wild-type males and mutant females to be explored
+#' @param sc        Cost of compensation selection coefficient against offspring resulting from matings
+#'                  between wild-type fathers and mothers with mutant comensatory allele
+#' @export
+#' @seealso
+#' @author Colin Olito
+makeDataYXTimeFix  <-  function(reps = reps, N = N, sm = sm, 
+									  ho.vals = ho.vals, delta = delta, 
+									  hc.vals = hc.vals, sc = sc,
+									  uy = 1e-3, qy.init = "singleCopy",
+									  ux = 1.5e-3, qx.init = 0, Ff.init = c(0.25, 0.5, 0.25)) {
+
+	# length of dominance gradient being explored
+	len.h  <-  length(ho.vals)
+
+	# Define output variables
+	tInvade_y    <-  c()
+	tFix_y       <-  c()
+	tInvade_x    <-  c()
+	tFix_x       <-  c()
+	qCrit_y      <-  c()
+	qCrit_x      <-  c()
+	qyTilde      <-  c()
+	qyTildeTime  <-  c()
+	deltaInv     <-  c()
+	deltaFix     <-  c()
+	deltaInvFix  <-  c()
+	tCycle       <-  c()
+
+	# Dominance gradient loop
+	print('Running Y-X Coevolutionary Cycle Simulations')
+	for(i in 1:len.h) {
+		# Print progress to terminal
+		cat("\n")
+		print(paste("Running dominance value", i, "/",len.h))
+		pb   <-  txtProgressBar(min=0, max=reps, style=3)
+		setTxtProgressBar(pb, 0)
+		
+		# dummy variables for replicate simulation output
+		tInvade_yTemp     <-  c()
+		tFix_yTemp        <-  c()
+		tInvade_xTemp     <-  c()
+		tFix_xTemp        <-  c()
+		deltaInv_Temp     <-  c()
+		deltaFix_Temp     <-  c()
+		deltaInvFix_Temp  <-  c()
+		tCycle_Temp       <-  c()
+
+		# Replicate simulation loop
+		for(n in 1:reps) {
+			coEvolCycleData  <-  yXLinkedCoEvolCycle(N = N, sm = sm, ho = ho.vals[i], 
+													 delta = delta, hc = hc.vals[i], sc = sc,
+													 uy = uy, qy.init = "singleCopy",
+													 ux = ux, qx.init = 0, Ff.init = c(0.25, 0.5, 0.25))
+			tInvade_yTemp[n]     <-  coEvolCycleData$yInvTime
+			tFix_yTemp[n]        <-  coEvolCycleData$yFixTime
+			tInvade_xTemp[n]     <-  coEvolCycleData$xInvTime
+			tFix_xTemp[n]        <-  coEvolCycleData$xFixTime
+			deltaInv_Temp[n]     <-  tInvade_xTemp[n] - tInvade_yTemp[n]
+			deltaFix_Temp[n]     <-  tFix_xTemp[n] - tFix_yTemp[n]
+			deltaInvFix_Temp[n]  <-  tFix_xTemp[n] - tInvade_yTemp[n]
+			
+			# Back-calculate total time for complete coevlutionary cycles
+			# from generation when compensatory mutation that ultimately fixed occurred
+			yMutTime  <-  tInvade_yTemp[n]
+			qy  <-  coEvolCycleData$qy.t[yMutTime]
+			while(qy > 0) {
+				yMutTime  <-  yMutTime - 1
+				if(yMutTime == 0) {
+					break
+				}
+				qy  <-  coEvolCycleData$qy.t[yMutTime]
+			}
+			tCycle_Temp[n]         <-  tFix_xTemp[n] - (yMutTime + 1)
+			setTxtProgressBar(pb, n)			
+		}
+
+		# output data for each level of dominance gradient, calculate necessary means
+		tInvade_y[i]    <-  mean(tInvade_yTemp)
+		tFix_y[i]       <-  mean(tFix_yTemp)
+		tInvade_x[i]    <-  mean(tInvade_xTemp)
+		tFix_x[i]       <-  mean(tFix_xTemp)
+		qCrit_y[i]      <-  coEvolCycleData$qcrit.y
+		qCrit_x[i]      <-  coEvolCycleData$qcrit.x
+		qyTilde[i]      <-  coEvolCycleData$qyTilde
+		qyTildeTime[i]  <-  coEvolCycleData$qyTildeTime
+		deltaInv[i]     <-  mean(deltaInv_Temp)
+		deltaFix[i]     <-  mean(deltaFix_Temp)
+		deltaInvFix[i]  <-  mean(deltaInvFix_Temp)
+		tCycle[i]       <-  mean(tCycle_Temp)
+	}
+	# compile output data as dataframe
+	data  <-  data.frame(
+						 "sm"           =  rep(sm,    times=len.h),
+						 "delta"        =  rep(delta, times=len.h),
+						 "sc"           =  rep(sc,    times=len.h),
+						 "ho"           =  ho.vals,
+						 "hc"           =  hc.vals,
+						 "tInvade_y"    =  tInvade_y,
+						 "tFix_y"       =  tFix_y,
+						 "tInvade_x"    =  tInvade_x,
+						 "tFix_x"       =  tFix_x,
+						 "deltaInv"     =  deltaInv,
+						 "deltaFix"     =  deltaFix,
+						 "deltaInvFix"  =  deltaInvFix,
+						 "tCycle"       =  tCycle,
+						 "qCrit_y"      =  qCrit_y,
+						 "qCrit_x"      =  qCrit_x,
+						 "qyTilde"      =  qyTilde,
+						 "qyTildeTime"  =  qyTildeTime
+						)
+	# Write data to file
+	filename  <-  paste("./output/data/simData/dataYXTimeFix", "_sm", sm, "_delta", delta, "_sc", sc, "_N", N, "_reps", reps, ".csv", sep="")	
+	write.csv(data, file=filename)
+}
+
+
+
+
+
+
+
+
+
+
+#' Run replicate stochastic simulation to generate a data set for plotting
+#' the Time To fixation for invasion of mutant y and
+#' X-LINKED compensatory mutations 
+#' 
+#' @title makeDataXLinkedInv
+#' @title makeDataYAutoInv
+#' @param reps       How many replicate simulations will be run
+#' @param N          Population size
+#' @param sm         Selection favouring mutant y male gametes
+#' @param ho.vals    Values of dominace coefficients for selection against offspring resulting from 
+#'                   matings between mutant males and wild-type females to be explored
+#' @param delta      Difference between sm and selection coefficient for selection against offspring 
+#'                   resulting from matings between mutant y fathers and wild-type compensatory mothers.
+#'                   (delta = sm - so)
+#' @param hc.vals    Values of dominace coefficients for selection against offspring resulting from 
+#' 					 matings between wild-type males and mutant females to be explored
+#' @param sc        Cost of compensation selection coefficient against offspring resulting from matings
+#'                  between wild-type fathers and mothers with mutant comensatory allele
+#' @export
+#' @seealso
+#' @author Colin Olito
+makeDataYXTimeFixMutGrad  <-  function(reps = reps, N = N, sm = sm, 
+									  ho = ho, delta = delta, 
+									  hc = hc, sc = sc,
+									  uy = 1e-3, qy.init = "singleCopy",
+									  ux = ux.vals, qx.init = 0, Ff.init = c(0.25, 0.5, 0.25)) {
+
+	# length of mutation rate gradient being explored
+	len.ux  <-  length(ux.vals)
+
+	# Define output variables
+	tInvade_y    <-  c()
+	tFix_y       <-  c()
+	tInvade_x    <-  c()
+	tFix_x       <-  c()
+	qCrit_y      <-  c()
+	qCrit_x      <-  c()
+	qyTilde      <-  c()
+	qyTildeTime  <-  c()
+	deltaInv     <-  c()
+	deltaFix     <-  c()
+	deltaInvFix  <-  c()
+	tCycle       <-  c()
+
+	# Mutation rate gradient loop
+	print('Running Y-X Coevolutionary Cycle Simulations')
+	for(i in 1:len.ux) {
+
+		# Print progress to terminal
+		cat("\n")
+		print(paste("Running u_x value", i, "/",len.ux))
+		pb   <-  txtProgressBar(min=0, max=reps, style=3)
+		setTxtProgressBar(pb, 0)
+		
+		# dummy variables for replicate simulation output
+		tInvade_yTemp     <-  c()
+		tFix_yTemp        <-  c()
+		tInvade_xTemp     <-  c()
+		tFix_xTemp        <-  c()
+		deltaInv_Temp     <-  c()
+		deltaFix_Temp     <-  c()
+		deltaInvFix_Temp  <-  c()
+		tCycle_Temp       <-  c()
+
+		# Replicate simulation loop
+		for(n in 1:reps) {
+			coEvolCycleData  <-  yXLinkedCoEvolCycle(N = N, sm = sm, ho = ho, 
+													 delta = delta, hc = hc, sc = sc,
+													 uy = uy, qy.init = "singleCopy",
+													 ux = ux.vals[i], qx.init = 0, Ff.init = c(0.25, 0.5, 0.25))
+			tInvade_yTemp[n]     <-  coEvolCycleData$yInvTime
+			tFix_yTemp[n]        <-  coEvolCycleData$yFixTime
+			tInvade_xTemp[n]     <-  coEvolCycleData$xInvTime
+			tFix_xTemp[n]        <-  coEvolCycleData$xFixTime
+			deltaInv_Temp[n]     <-  tInvade_xTemp[n] - tInvade_yTemp[n]
+			deltaFix_Temp[n]     <-  tFix_xTemp[n] - tFix_yTemp[n]
+			deltaInvFix_Temp[n]  <-  tFix_xTemp[n] - tInvade_yTemp[n]
+			
+			# Back-calculate total time for complete coevlutionary cycles
+			# from generation when compensatory mutation that ultimately fixed occurred
+			yMutTime  <-  tInvade_yTemp[n]
+			qy  <-  coEvolCycleData$qy.t[yMutTime]
+			while(qy > 0) {
+				yMutTime  <-  yMutTime - 1
+				if(yMutTime == 0) {
+					break
+				}
+				qy  <-  coEvolCycleData$qy.t[yMutTime]
+			}
+			tCycle_Temp[n]         <-  tFix_xTemp[n] - (yMutTime + 1)
+			setTxtProgressBar(pb, n)			
+		}
+
+		# output data for each value of mutation rate gradient, calculate necessary means
+		tInvade_y[i]    <-  mean(tInvade_yTemp)
+		tFix_y[i]       <-  mean(tFix_yTemp)
+		tInvade_x[i]    <-  mean(tInvade_xTemp)
+		tFix_x[i]       <-  mean(tFix_xTemp)
+		qCrit_y[i]      <-  coEvolCycleData$qcrit.y
+		qCrit_x[i]      <-  coEvolCycleData$qcrit.x
+		qyTilde[i]      <-  coEvolCycleData$qyTilde
+		qyTildeTime[i]  <-  coEvolCycleData$qyTildeTime
+		deltaInv[i]     <-  mean(deltaInv_Temp)
+		deltaFix[i]     <-  mean(deltaFix_Temp)
+		deltaInvFix[i]  <-  mean(deltaInvFix_Temp)
+		tCycle[i]       <-  mean(tCycle_Temp)
+	}
+	# compile data as dataframe
+	data  <-  data.frame(
+						 "sm"           =  rep(sm,    times=len.ux),
+						 "delta"        =  rep(delta, times=len.ux),
+						 "sc"           =  rep(sc,    times=len.ux),
+						 "ho"           =  rep(ho, times=len.ux),
+						 "hc"           =  rep(hc, times=len.ux),
+						 "uy"           =  rep(uy, times=len.ux),
+						 "ux"           =  ux.vals,
+						 "tInvade_y"    =  tInvade_y,
+						 "tFix_y"       =  tFix_y,
+						 "tInvade_x"    =  tInvade_x,
+						 "tFix_x"       =  tFix_x,
+						 "deltaInv"     =  deltaInv,
+						 "deltaFix"     =  deltaFix,
+						 "deltaInvFix"  =  deltaInvFix,
+						 "tCycle"       =  tCycle,
+						 "qCrit_y"      =  qCrit_y,
+						 "qCrit_x"      =  qCrit_x,
+						 "qyTilde"      =  qyTilde,
+						 "qyTildeTime"  =  qyTildeTime
+						)
+	# Write data to file
+	filename  <-  paste("./output/data/simData/dataYXTimeFixMutGrad2", "_sm", sm, "_delta", delta, "_ho", ho, "_sc", sc, "_hc", hc, "_N", N, "_reps", reps, ".csv", sep="")	
+	write.csv(data, file=filename)
+}
+
+
+
+
+
+
+

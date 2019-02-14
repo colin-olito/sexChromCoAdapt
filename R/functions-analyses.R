@@ -17,6 +17,9 @@
 rm(list=ls())
 
 
+log10space <- function(b, d1, d2, n) {
+	b*10^(seq(d1, d2, length.out=n)) 
+}
 
 #' Internal. Create nice rounded numbers for plotting.
 #'
@@ -151,19 +154,38 @@ oneLocVar  <-  function(q, s) {
 #  Threshold frequencies of y at 
 #  which compensatory mutations are
 #  favoured
-qTildeA  <-  function(sm, ho, delta, hc, sc) {
+qTildeA  <-  function(sm, ho, so, hc, sc) {
+	(hc*sc) / (hc*sc + so*(1 - ho)*(1 + sm))
+}
+qTildeA_delta  <-  function(sm, ho, delta, hc, sc) {
 	(hc*sc) / (hc*sc + (sm - delta)*(1 - ho)*(1 + sm))
 }
 qTildeM  <-  function(sm, delta, sc) {
 	sc / (sc*(1 + sm)*(sm - delta))
 }
 b  <-  function(sm,delta,sc) {
+	sm*(2 + sm*(2 - sm*(1 - sm))) - delta*(2 + sm + (sm^2) + (2*(sm^3))) + ((sm - so)^2)*(1 + sm^2) + sc*(2 + sm^2 - (sm - so)*(1 + sm))
+}
+d  <-  function(sm,so,sc) {
+	(sc + sm + (3*sm^2) - 3*(sm - so)*(1 + sm))*(sm^2 - (sm - so)*(1 + sm))
+}
+qTildeX  <-  function(sm, ho, so, hc, sc) {
+	-((2*hc*sc - hc*sc*sm + sm^2 + 2*so - 2*ho*so + hc*sc*so + sm*so - 
+     3*ho*sm*so + hc*sc*sm*so - (sm^2)*so - ho*(sm^2)*so + ho*(so^2) + 
+     2*ho*sm*(so^2) + ho*(sm^2)*(so^2) - sqrt(8*hc*sc*(sm*(-1 + so) + so)*(-hc*sc + (-2 + ho)*so + 
+           sm*(1 - 2*so + ho*so)) + ((2 + ho*(-2 + so))*so + 
+          hc*sc*(2 + sm*(-1 + so) + so) + 
+          (sm^2)*(-1 + so)*(-1 + ho*so) + 
+          sm*so*(1 + ho*(-3 + 2*so)))^2)) / (2*(sm*(-1 + so) + so)*(-hc*sc + (-2 + ho)*so + sm*(1 - 2*so + ho*so))))
+}
+
+bd  <-  function(sm,delta,sc) {
 	sm*(2 + sm*(2 - sm*(1 - sm))) - delta*(2 + sm + (sm^2) + (2*(sm^3))) + (delta^2)*(1 + sm^2) + sc*(2 + sm^2 - delta*(1 + sm))
 }
-d  <-  function(sm,delta,sc) {
+dd  <-  function(sm,delta,sc) {
 	(sc + sm + (3*sm^2) - 3*delta*(1 + sm))*(sm^2 - delta*(1 + sm))
 }
-qTildeX  <-  function(sm, ho, delta, hc, sc) {
+qTildeXd  <-  function(sm, ho, delta, hc, sc) {
 	(b(sm=sm, delta=delta, sc=sc) - sqrt(b(sm=sm, delta=delta, sc=sc)^2 - 8*sc*d(sm=sm, delta=delta, sc=sc))) / (2*d(sm=sm, delta=delta, sc=sc))
 }
 

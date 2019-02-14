@@ -27,11 +27,11 @@
 #' @param Fm     2 x 2 Matrix of adult male genotypic frequencies
 #' @param W_y.g  Fitness expressions for male gametes (i.e., fitness effects associated with the wild-type and mutant Y chromosomes)
 #' @export
-maleGameteSel  <-  function(Fm, W_y.g) {
+maleGameteSelMito  <-  function(Fm, W_y.g) {
 	(Fm * c(1, W_y.g, 1, W_y.g)) / sum((Fm * c(1, W_y.g, 1, W_y.g)))
 }
 
-offspringSel  <-  function(Fm.g, Ff, W_c, W_o) {
+offspringSelMito  <-  function(Fm.g, Ff, W_c, W_o) {
 	cbind(rowSums(Fm.g),rowSums(Fm.g))*rbind(Ff,Ff)*rbind(c(W_c[1], W_c[2]), c(W_o[1], W_o[2]))
 }
 
@@ -166,12 +166,12 @@ yMitoInvadeFwdSim  <-  function(N = N, sm = sm, delta = delta, sc = sc,
 
 			## Step through recursions:
 			# 1) Calculate frequency of mutant Y among male gametes
-			Fm.g    <-  maleGameteSel(Fm=Fm, W_y.g=W_y.g)
+			Fm.g    <-  maleGameteSelMito(Fm=Fm, W_y.g=W_y.g)
 			# 2) Mating and selection
 	# males: Y/M, Y/m, 
 	#		 y/M, y/m
 	# females: M, m
-			O     <-  offspringSel(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
+			O     <-  offspringSelMito(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
 			Wbar  <-  sum(O)
 			# 4) Expected frequencies in offspring, after selection
 			E.O     <-  O/Wbar
@@ -245,16 +245,15 @@ yMitoInvadeFwdSim  <-  function(N = N, sm = sm, delta = delta, sc = sc,
 #browser()
 			## Step through recursions:
 			# 1) Calculate frequency of mutant Y among male gametes
-			Fm.g    <-  maleGameteSel(Fm=Fm, W_y.g=W_y.g)
+			Fm.g    <-  maleGameteSelMito(Fm=Fm, W_y.g=W_y.g)
 			# 2) Mating and selection
 	# males: Y/M, Y/m, 
 	#		 y/M, y/m
 	# females: M, m
-			O     <-  offspringSel(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
+			O     <-  offspringSelMito(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
 			Wbar  <-  sum(O)
 			# 4) Expected frequencies in offspring, after selection
 			E.O   <-  O/Wbar
-			print(E.)
 			E.qy  <-  sum(E.O[2,])
 			E.qm  <-  sum(E.O[,2])
 			# 5) Realized frequencies in adults
@@ -397,9 +396,9 @@ yMitoCoEvolCycle  <-  function(N = N, sm = sm, delta = delta, sc = sc,
 			}
 		}
 		# 2) Calculate frequency of mutant Y among male gametes
-		Fm.g    <-  maleGameteSel(Fm=Fm, W_y.g=W_y.g)
+		Fm.g    <-  maleGameteSelMito(Fm=Fm, W_y.g=W_y.g)
 		# 3) Mating and selection
-		O     <-  offspringSel(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
+		O     <-  offspringSelMito(Fm.g=Fm.g, Ff=Ff, W_c=W_c, W_o=W_o)
 		Wbar  <-  sum(O)
 		# 4) Expected frequencies in offspring, after selection
 		E.O     <-  O/Wbar
@@ -449,26 +448,3 @@ return(res)
 
 
 
-
-#' Run replicate stochastic simulation to generate a data set for plotting
-#' the probability of establishment/fixation for invaison of mutant y and
-#' mitochondrial compensatory mutations 
-#' 
-#' @title makeDataYMitoInv
-#' @param N          Population size
-#' @param sm         Selection favouring mutant y male gametes
-#' @param delta.vals Difference between sm and selection coefficient for selection against offspring 
-#'                   resulting from matings between mutant y fathers and wild-type compensatory mothers.
-#'                   (delta = sm - so)
-#' @param sc.vals    Cost of compensation selection coefficient against offspring resulting from matings
-#'                   between wild-type fathers and mothers with mutant comensatory allele
-#' @export#' @seealso `offFreq`, `findEqFreqs`, `x.1`, ...
-#' @author Colin Olito
-makeDataYMitoInv  <-  function(N = N, sm = sm, delta = delta.vals, sc = sc.vals) {
-
-	for(i in 1:length(delta.vals)) {
-		for(j in 1:length(sc.vals)) {
-			
-		}
-	}
-}

@@ -1,10 +1,5 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{5}
 \providecommand{\natexlab}[1]{#1}
-
-\bibitem[{Andersson(1994)}]{Andersson1994}
-Andersson, M. 1994.
-\newblock Sexual Selection.
-\newblock Princeton University Press, Princeton, New Jersey, USA.
 
 \bibitem[{Connallon et~al.(2017)Connallon, Camus, Morrow, and
   Dowling}]{ConnallonDowling2017}
@@ -13,36 +8,26 @@ Connallon, T., F.~M. Camus, E.~M. Morrow, and D.~K. Dowling. 2017.
   mother's curse.
 \newblock Proc.~Roy.~Soc.~B 285:1--9.
 
-\bibitem[{Ewens(2004)}]{Ewens2004}
-Ewens, W.~J. 2004.
-\newblock Mathematical population genetics I. Theoretical introduction, 2nd
-  edn.
-\newblock Springer, New York, NY, USA.
+\bibitem[{Kimura(1985)}]{Kimura1985}
+Kimura, M. 1985.
+\newblock The role of compensatory neutral mutations in molecular evolution.
+\newblock J.~Genetics 64:7--19.
 
-\bibitem[{Frank and Hurst(1996)}]{FrankHurst1996}
-Frank, S.~A., and L.~D. Hurst. 1996.
-\newblock Mitochondria and male disease.
-\newblock Nature 383:224.
+\bibitem[{Otto and Day(2007)}]{OttoDay2007}
+Otto, S., and T.~Day. 2007.
+\newblock A biologist's guide to mathematical modeling in ecology and
+  evolution.
+\newblock Princeton University Press, New Jersey, USA.
 
-\bibitem[{James(1973)}]{James1973}
-James, J.~W. 1973.
-\newblock Covariances between relatives due to sex-linked genes.
-\newblock Biometrics 29:584--588.
+\bibitem[{Stephan(1996)}]{Stephan1996}
+Stephan, W. 1996.
+\newblock The rate of compensatory evolution.
+\newblock Genetics 144:419--426.
 
-\bibitem[{Lynch and Walsh(1998)}]{LynchWalsh1998}
-Lynch, M., and B.~Walsh. 1998.
-\newblock Genetics and Analysis of Quantitative Traits.
-\newblock Sinauer Associates, Inc., MA, USA.
-
-\bibitem[{Maynard~Smith(1976)}]{MaynardSmith1976}
-Maynard~Smith, J. 1976.
-\newblock What determines the rate of evolution?
-\newblock American Naturalist 110:331--338.
-
-\bibitem[{Roze et~al.(2005)Roze, Rousset, and Michalakis}]{Roze-etal2005}
-Roze, D., F.~Rousset, and Y.~Michalakis. 2005.
-\newblock Germline bottlenecks, biparental inheritance and selection on
-  mitochondrial variants: A two-level selection model.
-\newblock Genetics 170:1385--1399.
+\bibitem[{Weinreich and Chao(2005)}]{WeinreichChao2005}
+Weinreich, D.~M., and L.~Chao. 2005.
+\newblock Rapid evolutionary escape by large populations from local fitness
+  peaks is likely in nature.
+\newblock Evolution 59:1175--1182.
 
 \end{thebibliography}
