@@ -50,7 +50,7 @@ for(i in 1:length(delta.vals)) {
 }
 
 # Re-run sims for delta = 0.095 with higher reps to clean up plot
-reps     <-  5000000
+reps     <-  7500000
 N        <-  1000
 sm       <-  0.1
 delta    <-  0.095

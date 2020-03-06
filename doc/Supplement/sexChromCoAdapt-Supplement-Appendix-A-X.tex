@@ -35,7 +35,7 @@
 \RequirePackage[scaled]{helvet}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{url}
-\RequirePackage[colorlinks=true, allcolors=blue]{hyperref}
+\RequirePackage[colorlinks=true, allcolors=black]{hyperref}
 %\RequirePackage[colorlinks=true, allcolors=blue,draft=true]{hyperref}
 \RequirePackage{lettrine}
 \RequirePackage{cleveref}
@@ -93,15 +93,17 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Supplementary Material (Appendices A--X) for: Sexually antagonistic coevolution between the sex chromosomes. \hl{\textit{PNAS}}}
+\title{Supplementary Material (Appendix B) for: Sexually antagonistic coevolution between the sex chromosomes of {\itshape Drosophila melanogaster}. \textit{PNAS}}
 
-\author{Katrine K.~Lund-Hansen, Colin Olito, Edward H.~Morrow, \& Jessica K.~Abbott}
+\author{Katrine K.~Lund-Hansen$^{a}$, Colin Olito$^{a}$, Edward H.~Morrow$^{b}$, \& Jessica K.~Abbott$^{a}$}
 \date{\today}
 
 \begin{document}
 \maketitle
 
-\noindent{} $^{2}$ Department of Biology, Section for Evolutionary Ecology, Lund University, Lund 223 62, Sweden.
+\noindent{} $^{a}$ Department of Biology, Section for Evolutionary Ecology, Lund University, Lund 223 62, Sweden.
+
+\noindent{} $^{b}$ School of Life Sciences, University of Sussex, Brighton BN1 9QG, United Kingdom.
 
 \noindent{} $^{\ast}$ Corresponding author e-mail: \url{katrine.lund-hansen@biol.lu.se}
 
@@ -112,14 +114,14 @@
 \makeatother
 %\lhead{\textit{Supplement to Olito \textit{et al.}. Coadaptation between the sex chromosomes. \textit{Targ.~Journ.}.\\}}
 \lhead{\textit{Supplement to Lund-Hansen \textit{et al}. (2019). PNAS}\\ }
-\rhead{\textit{Coadaptation between the sex chromosomes}\\ }
+\rhead{\textit{Coevolution between the sex chromosomes}\\ }
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 \addtolength{\headheight}{12pt}
 
 
-\section{Appendix A: Development of the recursions}
-\renewcommand{\theequation}{A\arabic{equation}}
+\section{Appendix B: Development of the recursions}
+\renewcommand{\theequation}{B\arabic{equation}}
 \titleformat{\subsubsection}    
 {\normalfont\fontsize{12pt}{17}\itshape}{\thesubsubsection}{12pt}{}
 
@@ -190,21 +192,21 @@ To analyze the linear stability of the system of recursion equations, Eqs(\ref{e
 	\end{array} \right)
 \end{equation}
 
-\noindent If a mutant $y$ chromosome sweeps to fixation prior to the occurrance of a compensatory mutation, completion of coevolutionary cycle requires that a mutant $a$ allele invades a population initially fixed for $y$ ($q_y = 1$). To determine the conditions for invasion of $a$ into a population initially fixed for $y$, we evaluated the candidate leading eigenvalue associated with invasion at $\mathbf{A}$, $\lambda_{\mathbf{A}}$ at the boundary equilibrium where $q_y = 1$ and $q_a = 0$.
+\noindent If a mutant $y$ chromosome sweeps to fixation prior to the occurrance of a compensatory mutation, completion of a coevolutionary cycle requires that a mutant $a$ allele invades a population initially fixed for $y$ ($q_y = 1$). To determine the conditions for invasion of $a$ into a population initially fixed for $y$, we evaluated the candidate leading eigenvalue associated with invasion at $\mathbf{A}$, $\lambda_{\mathbf{A}}$ at the boundary equilibrium where $q_y = 1$ and $q_a = 0$.
 
 \begin{equation} \label{eq:Lambda-a-qy1}
-	\lambda_{\mathbf{A}|\hat{q}_y = 1,\hat{q}_a = 0} = \frac{(2 - s_o - h_o s_o)} {(2 (1 - s_o))}.
+	\lambda_{\mathbf{A}}|_{\hat{q}_y = 1,\hat{q}_a = 0} = \frac{(2 - s_o - h_o s_o)} {(2 (1 - s_o))}.
 \end{equation}
 
-\noindent Solving $\lambda_{\mathbf{A}|\hat{q}_y = 1,\hat{q}_a = 0} - 1 > 0$ yields the intuitive conclusion that invasion of the compensatory allele requires only that there is selection against the wild-type allele (i.e.,  $h_o < 1$ and $0 < s_o < 1$).
+\noindent Solving $\lambda_{\mathbf{A}}|_{\hat{q}_y = 1,\hat{q}_a = 0} - 1 > 0$ yields the intuitive conclusion that invasion of the compensatory allele requires only that there is selection against the wild-type allele (i.e.,  $h_o < 1$ and $0 < s_o < 1$).
 
 On the other hand, if a compensatory mutation arises before the mutant $y$ chromosome has fixed in the population, we must determine the conditions for invasion of a mutant $a$ allele into a population where $q_y$ is unspecified. Given these initial frequencies, and the fitness expressions provided in Table 1,
 
 \begin{equation} \label{eq:Lambda-a}
-	\lambda_{\mathbf{A}|\hat{q}_a = 0} = \frac{2(q_y s_m + 1) - h_c s_c(1 - q_y) - q_y s_o (1 + h_o)(1 + s_m)} {2 q_y (s_m (1 - s_o) - s_o) + 2}.
+	\lambda_{\mathbf{A}}|_{\hat{q}_a = 0} = \frac{2(q_y s_m + 1) - h_c s_c(1 - q_y) - q_y s_o (1 + h_o)(1 + s_m)} {2 q_y (s_m (1 - s_o) - s_o) + 2}.
 \end{equation}
 
-\noindent Solving $\lambda_{\mathbf{A}|\hat{q}_a = 0} - 1 > 0$ for $q_y$ yields the threshold frequency of the mutant $y$ allele at which selection begins to favour the invasion of the $a$ allele
+\noindent Solving $\lambda_{\mathbf{A}}|_{\hat{q}_a = 0} - 1 > 0$ for $q_y$ yields the threshold frequency of the mutant $y$ allele at which selection begins to favour the invasion of the $a$ allele
 
 \begin{equation} \label{eq:aInvDelta-threshold}
 	\tilde{q}_y^{\text{A}} = \frac{h_c s_c} {h_c s_c + (s_m - \delta)(1 - h_o)(1+s_m)}.
@@ -220,9 +222,9 @@ When the compensatory locus is located on the X chromosome, it is necessary to t
 
 \begin{subequations}\begin{align} \label{eq:Fg-Xlinked}
 	F_{XY}^{g} &= \frac{F_{XY}w^{m}_{Y}}{\overline{w}_{m}} \\
-	F_{Xy}^{g} &= \frac{F_{Xy}w^{m}_{Y}}{\overline{w}_{m}} \\
+	F_{Xy}^{g} &= \frac{F_{Xy}w^{m}_{y}}{\overline{w}_{m}} \\
 	F_{xY}^{g} &= \frac{F_{xY}w^{m}_{Y}}{\overline{w}_{m}} \\
-	F_{xy}^{g} &= \frac{F_{xy}w^{m}_{Y}}{\overline{w}_{m}}, 
+	F_{xy}^{g} &= \frac{F_{xy}w^{m}_{y}}{\overline{w}_{m}}, 
 \end{align}\end{subequations}
 
 \noindent where, $\overline{w}_{m}$ is now the sum of the numerators of Eqs(\ref{eq:Fg-Xlinked}). For simplicity, we also define the overall frequency of the $Y$ and $y$ chromosomes among male gametes as 
@@ -275,13 +277,13 @@ To analyze the linear stability of the system of recursion equations, Eqs(\ref{e
 
 \noindent Analyzing the leading eigenvalue of $\mathbb{J}$ evaluated at the boundary equilibrium corresponding to initiation of a coevolutionary cycle (i.e., $q_y = 0$, $q_x = 1$) recovers the same invasion criteria as in the autosomal model ($\delta > 0$).
 
-To determine when selection will favour invasion of the compensatory $x$ allele, we evaluated the candidate leading eigenvalue associated with corresponding invasion at $\mathbf{X}$, $\lambda_{\mathbf{X}}$ at the initial equilibrium where $q_x = 0$, and the $q_y$ is unspecified. Given these initial frequencies, and the fitness expressions provided in Table 1, $\lambda_{\mathbf{X}|\hat{q}_x = 0}$ is a large polynomial expression (see the accompanying Mathematica notebook in Appendix \hl{X}, where this result is derived). However, under additive fitness effects at $\mathbf{X}$ ($h_c = h_o = 1/2$), we can still solve $\lambda_{\mathbf{X}|\hat{q}_x = 0} - 1 = 0$ for $q_y$ to give the threshold frequency of the mutant $y$ chromosome at which selection will begin to favour the mutant $x$ compensatory allele. Although the solution is still complicated, it follows the general form
+To determine when selection will favour invasion of the compensatory $x$ allele, we evaluated the candidate leading eigenvalue associated with corresponding invasion at $\mathbf{X}$, $\lambda_{\mathbf{X}}$ at the initial equilibrium where $q_x = 0$, and the $q_y$ is unspecified. Given these initial frequencies, and the fitness expressions provided in Table 1, $\lambda_{\mathbf{X}}|_{\hat{q}_x = 0}$ is a large polynomial expression (see the accompanying Mathematica notebook in Appendix \hl{X}, where this result is derived). However, under additive fitness effects at $\mathbf{X}$ ($h_c = h_o = 1/2$), we can still solve $\lambda_{\mathbf{X}}|_{\hat{q}_x = 0} - 1 = 0$ for $q_y$ to give the threshold frequency of the mutant $y$ chromosome at which selection will begin to favour the mutant $x$ compensatory allele. Although the solution is still complicated, it follows the general form
 
 \begin{equation} \label{eq:xInvDelta-threshold}
-	\tilde{q}_y^{\text{X}} = \frac{b - \sqrt{b^2 - 8 s_c c}} {2 c}
+	\tilde{q}_y^{\text{X}} = \frac{b - \sqrt{b^2 - 8 s_c c}} {2 c},
 \end{equation}
 
-\noindent (see Eq(\hl{6}) in the main text), where 
+\noindent where 
 
 \begin{subequations}
 	\begin{align}
@@ -291,36 +293,6 @@ To determine when selection will favour invasion of the compensatory $x$ allele,
 \end{subequations}
 
 \noindent 
-
-\newpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Appendix B: Supplementary Results} \label{sec:SuppResults}
-\renewcommand{\theequation}{B\arabic{equation}}
-\setcounter{equation}{0}
-\renewcommand{\thefigure}{B\arabic{figure}}
-\setcounter{figure}{0}
-
-%\begin{figure}[ht!]
-%\centering
-%\includegraphics[scale=0.58]{./FigB1-Gyno-obOut-funnel}
-%\caption{Invasion of dominant male-sterility mutations into populations with segregating SA variation under obligate outcrossing. Plots show the fraction of parameter conditions maintaining single-locus SA polymorphism (within the range $0 < s_f,s_m \leq 0.5$) where a dominant male-sterility allele at $\mathbf{M}$ can invade populations initially at single-locus equilibrium frequencies for $\mathbf{A}$ with additive fitness effects ($h_f=h_m=1/2$). Results were obtained by evaluating the two relevant candidate leading eigenvalues ($\lambda_{\mathbf{M}}$,$\lambda_{\mathbf{AM}}$) of the Jacobian matrix of the genotype $\times$ transmission mode recursions for populations at the above initial conditions for $1000$ points uniformly distributed throughout the relevant $s_f \times s_m$ paramter space. Blue points indicate parameter sets where $1 - \lambda_{\mathbf{M}} > 0$, and/or $\lambda_{\mathbf{AM}} - 1 > 0$. Solid black lines represent the corresponding single-locus invasion criteria for SA alleles.}
-%\label{fig:GynObOutFunnel}
-%\end{figure}
-%\newpage{}
-
-%\begin{figure}[ht!]
-%\centering
-%\includegraphics[scale=0.58]{./FigB2-Gyno-C25-d80-funnel}
-%\caption{Invasion of dominant male-sterility mutations into populations with segregating SA variation under conditions of low selfing ($C = 0.25$) and high inbreeding depression ($\delta = 0.8$). Plots show the fraction of parameter conditions maintaining single-locus SA polymorphism (within the range $0 < s_f,s_m \leq 0.5$) where a dominant male-sterility allele at $\mathbf{M}$ can invade populations initially at single-locus equilibrium frequencies for $\mathbf{A}$ with additive fitness effects ($h_f=h_m=1/2$). Results were obtained by evaluating the two relevant candidate leading eigenvalues ($\lambda_{\mathbf{M}}$,$\lambda_{\mathbf{AM}}$) of the Jacobian matrix of the genotype $\times$ transmission mode recursions for populations at the above initial conditions for $1000$ points uniformly distributed throughout the relevant $s_f \times s_m$ paramter space. Blue points indicate parameter sets where $1 - \lambda_{\mathbf{M}} > 0$, and/or $\lambda_{\mathbf{AM}} - 1 > 0$. Solid black lines represent the corresponding single-locus invasion criteria for SA alleles.}
-%\label{fig:GynC25d80Funnel}
-%\end{figure}
-%\newpage{}
-%\newpage{}
-
-%\FloatBarrier
-
-
-\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%
 % Bibliography

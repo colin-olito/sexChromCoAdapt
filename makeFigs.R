@@ -31,9 +31,13 @@ source('R/functions-figures.R')
 toPdf(theoryFig(), figPath(name='theoryFig.pdf'), width=10.5, height=7)
 embed_fonts(figPath(name='theoryFig.pdf'))
 
-source('R/functions-figures.R')
 toPdf(theoryFig2(), figPath(name='theoryFig2.pdf'), width=15, height=5)
 embed_fonts(figPath(name='theoryFig2.pdf'))
+
+source('R/functions-figures.R')
+toPdf(theoryFig2vert(), figPath(name='theoryFig2vert.pdf'), width=5, height=15)
+embed_fonts(figPath(name='theoryFig2vert.pdf'))
+
 
 # toPdf(Fig.1wk(), figPath(name='Fig1wk.pdf'), width=7, height=7)
 # embed_fonts(figPath(name='Fig1wk.pdf'))

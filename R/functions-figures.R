@@ -348,9 +348,13 @@ theoryFig2  <-  function() {
               x       =  usr[2]*0.95,
               y       =  usr[4]*0.98,
               legend  =  c(
-                          expression(paste(italic(s[o])~"="~"0.005")),
-                          expression(paste(italic(s[o])~"="~"0.0025")),
-                          expression(paste(italic(s[o])~"="~"0.0015"))),
+                          expression(paste(italic(delta)~"="~"0.095")),
+                          expression(paste(italic(delta)~"="~"0.0975")),
+                          expression(paste(italic(delta)~"="~"0.0985"))),
+#              legend  =  c(
+#                          expression(paste(italic(s[o])~"="~"0.005")),
+#                          expression(paste(italic(s[o])~"="~"0.0025")),
+#                          expression(paste(italic(s[o])~"="~"0.0015"))),
               lty     =  1,
               lwd     =  3,
               col     =  c('#252525', 'grey50', 'grey70'),
@@ -383,8 +387,8 @@ theoryFig2  <-  function() {
     xDat = './output/data/simData/dataYXLinkedInv_sm0.1_delta0.005_sc0.005_N1000_reps5e+05.csv'
     aDat1 = './output/data/simData/dataYAutoInv_sm0.1_delta0.05_sc0.005_N1000_reps5e+05.csv'
     xDat1 = './output/data/simData/dataYXLinkedInv_sm0.1_delta0.05_sc0.005_N1000_reps5e+05.csv'
-    aDat2 = './output/data/simData/dataYAutoInv_sm0.1_delta0.095_sc0.005_N1000_reps5e+06.csv'
-    xDat2 = './output/data/simData/dataYXLinkedInv_sm0.1_delta0.095_sc0.005_N1000_reps5e+06.csv'
+    aDat2 = './output/data/simData/dataYAutoInv_sm0.1_delta0.095_sc0.005_N1000_reps7500000.csv'
+    xDat2 = './output/data/simData/dataYXLinkedInv_sm0.1_delta0.095_sc0.005_N1000_reps7500000.csv'
     autoDat     <-  read.csv(aDat, header=TRUE)
     XLinkedDat  <-  read.csv(xDat, header=TRUE)
     autoDat1     <-  read.csv(aDat1, header=TRUE)
@@ -411,9 +415,9 @@ theoryFig2  <-  function() {
 #        points(Py ~ autoDat$ho, pch=21, ylim=c(0,2))
 #        points(Py2 ~ autoDat2$ho, pch=21, ylim=c(0,2))
         abline(h=1,lty=2, lwd=2)
-        points(Pxa  ~ autoDat$ho, pch=21, bg='grey80')
-        points(Pxa1  ~ autoDat$ho, pch=21, bg='grey60')
-        points(Pxa2 ~ autoDat$ho, pch=21, bg=transparentColor('#252525', opacity=0.85))
+        points(Pxa  ~ autoDat$ho, pch=21, bg='grey80', cex=1.5)
+        points(Pxa1  ~ autoDat$ho, pch=21, bg='grey60', cex=1.5)
+        points(Pxa2 ~ autoDat$ho, pch=21, bg=transparentColor('#252525', opacity=0.85), cex=1.5)
         # axes and labels
         axis(1, las=1)
         axis(2, las=1)
@@ -448,6 +452,12 @@ theoryFig2  <-  function() {
     YX3         <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.05_ho0.5_sc0.05_hc0.5_N1000_reps500.csv"
     YA4         <-  "./output/data/simData/dataYATimeFixMutGrad2_sm0.1_delta0.05_ho0.5_sc0.05_hc0.5_N1000_reps500.csv"
     YX4         <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.05_ho0.5_sc0.005_hc0.5_N1000_reps500.csv"
+
+    YA5         <-  "./output/data/simData/dataYATimeFixMutGrad2_sm0.1_delta0.05_ho0.9_sc0.005_hc0.9_N1000_reps500.csv"
+    YX5         <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.05_ho0.9_sc0.05_hc0.9_N1000_reps500.csv"
+    YA6         <-  "./output/data/simData/dataYATimeFixMutGrad2_sm0.1_delta0.05_ho0.9_sc0.05_hc0.9_N1000_reps500.csv"
+    YX6         <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.05_ho0.9_sc0.005_hc0.9_N1000_reps500.csv"
+
     aData1      <-  read.csv(YA1, header=TRUE)
     xData1      <-  read.csv(YX1, header=TRUE)
     aData2      <-  read.csv(YA2, header=TRUE)
@@ -456,27 +466,271 @@ theoryFig2  <-  function() {
     xData3      <-  read.csv(YX3, header=TRUE)
     aData4      <-  read.csv(YA4, header=TRUE)
     xData4      <-  read.csv(YX4, header=TRUE)
+    aData5      <-  read.csv(YA5, header=TRUE)
+    xData5      <-  read.csv(YX5, header=TRUE)
+    aData6      <-  read.csv(YA6, header=TRUE)
+    xData6      <-  read.csv(YX6, header=TRUE)
     tCycle1     <-  xData1$tCycle / aData1$tCycle
     tCycle2     <-  xData2$tCycle / aData2$tCycle
     tCycle3     <-  xData3$tCycle / aData3$tCycle
     tCycle4     <-  xData4$tCycle / aData4$tCycle
+    tCycle5     <-  xData5$tCycle / aData5$tCycle
+    tCycle6     <-  xData6$tCycle / aData6$tCycle
     relMutRate  <-  aData1$ua / aData1$uy
 
-        plot(NA, axes=FALSE, type='n', main='',xlim = c(0,1), ylim = c(0.7,1.1), ylab='', xlab='', cex.lab=1.2)
+        plot(NA, axes=FALSE, type='n', main='',xlim = c(0,1), ylim = c(0.7,1.2), ylab='', xlab='', cex.lab=1.2)
         usr  <-  par('usr')
         rect(usr[1], usr[3], usr[2], usr[4], col='white', border=NA)
         plotGrid(lineCol='grey80')
         box()
         # plot data
         abline(h=1,lty=2, lwd=2)
-        points(tCycle1 ~ (relMutRate), pch=22, bg="#252525", col='black', ylim=c(0,2))
-        points(tCycle2 ~ (relMutRate), pch=22, bg="grey80", col='black', ylim=c(0,2))
-        points(tCycle3 ~ (relMutRate), pch=21, bg="#252525", col='black', ylim=c(0,2))
-        points(tCycle4 ~ (relMutRate), pch=21, bg="grey80", col='black', ylim=c(0,2))
+        points(tCycle1 ~ (relMutRate), pch=22, bg="#252525", col='black', cex=1.5, type='b', ylim=c(0,2))
+        points(tCycle2 ~ (relMutRate), pch=22, bg="grey80", col='black', cex=1.5, type='b', ylim=c(0,2))
+        points(tCycle3 ~ (relMutRate), pch=21, bg="#252525", col='black', cex=1.5, type='b', ylim=c(0,2))
+        points(tCycle4 ~ (relMutRate), pch=21, bg="grey80", col='black', cex=1.5, type='b', ylim=c(0,2))
+        points(tCycle5 ~ (relMutRate), pch=24, bg="#252525", col='black', cex=1.5, type='b', ylim=c(0,2))
+        points(tCycle6 ~ (relMutRate), pch=24, bg="grey80", col='black', cex=1.5, type='b', ylim=c(0,2))
         # axes and labels
         axis(1, las=1)
         axis(2, las=1)
-        proportionalLabel(-0.2, 0.5, expression(paste(T["cycle"]^X/T["cycle"]^A)), cex=1.2, adj=c(0.5, 0.5), xpd=NA, srt=90)
+        proportionalLabel(-0.2, 0.5, expression(paste(T[x]/T[A])), cex=1.2, adj=c(0.5, 0.5), xpd=NA, srt=90)
+        proportionalLabel(0.5, -0.2, expression(paste(italic(mu[i])/italic(mu[y]))), cex=1.2, adj=c(0.5, 0.5), xpd=NA)
+        proportionalLabel(0.03, 1.075, expression(paste(bold(C))), cex=1.2, adj=c(0.5, 0.5), xpd=NA)
+        #legend
+        legend(
+              x       =  usr[2]*0.65,
+              y       =  usr[4]*0.98,
+              legend  =  c(
+                          expression(paste(italic(s[c])~"="~"0.05")),
+                          expression(paste(italic(s[c])~"="~"0.005"))),
+              pch     =  21,
+              col     =  'black',
+              pt.bg   =  c('#252525', 'grey80'),
+              cex     =  1,
+              xjust   =  1,
+              yjust   =  1,
+              bty     =  'n',
+              border  =  NA
+        )
+
+        legend(
+              x       =  usr[2]*0.98,
+              y       =  usr[4]*0.98,
+              legend  =  c(
+                          expression(paste(italic(h[o])~"="~italic(h[c])~"="~"0.9")),
+                          expression(paste(italic(h[o])~"="~italic(h[c])~"="~"0.5")),
+                          expression(paste(italic(h[o])~"="~italic(h[c])~"="~"0.1"))),
+              pch     =  c(24,21,22),
+              col     =  'black',
+              pt.bg   =  NA,
+              cex     =  1,
+              xjust   =  1,
+              yjust   =  1,
+              bty     =  'n',
+              border  =  NA
+        )
+
+
+}
+
+
+
+
+
+theoryFig2vert  <-  function() {
+
+    # Set plot layout
+#    layout.mat <- matrix(c(1,1,2,
+#                           1,1,3), nrow=2, ncol=3, byrow=TRUE)
+    layout.mat <- matrix(c(1,2,3), nrow=3, ncol=1, byrow=TRUE)
+    layout <- layout(layout.mat,respect=TRUE)
+
+    # Calculate qTilda values for plotting
+    sms  <-  seq(0,0.1, by=0.001)
+
+    qTildeA_y1.add  <-  qTildeA(sm = sms, ho=1/2, so=0.0025, hc=1/2, sc=0.005)
+    qTildeX_y1.add  <-  qTildeX(sm = sms, ho=1/2, so=0.0025, hc=1/2, sc=0.005)
+    qTildeA_y2.add  <-  qTildeA(sm = sms, ho=1/2, so=0.005, hc=1/2, sc=0.005)
+    qTildeX_y2.add  <-  qTildeX(sm = sms, ho=1/2, so=0.005, hc=1/2, sc=0.005)
+    qTildeA_y3.add  <-  qTildeA(sm = sms, ho=1/2, so=0.025, hc=1/2, sc=0.005)
+    qTildeX_y3.add  <-  qTildeX(sm = sms, ho=1/2, so=0.025, hc=1/2, sc=0.005)
+
+
+# Panel A: qTilde_y examples
+    par(omi=c(0.5,0.5,0.5,0.5), mar = c(4,4,4,3), bty='o', xaxt='s', yaxt='s')
+    plot(NA, axes=FALSE, type='n', main='',xlim = c(0,0.1), ylim = c(0,1), ylab='', xlab='', cex.lab=1.2)
+        usr  <-  par('usr')
+        rect(usr[1], usr[3], usr[2], usr[4], col='white', border=NA)
+        plotGrid(lineCol='grey80')
+        box()
+        # plot data
+        lines(qTildeA_y3.add ~ sms, lwd=3, lty=1, col='grey70')
+        lines(qTildeX_y3.add ~ sms, lwd=3, lty=2, col='grey70')
+        lines(qTildeA_y2.add ~ sms, lwd=3, lty=1, col='grey50')
+        lines(qTildeX_y2.add ~ sms, lwd=3, lty=2, col='grey50')
+        lines(qTildeA_y1.add ~ sms, lwd=3, lty=1, col='#252525')
+        lines(qTildeX_y1.add ~ sms, lwd=3, lty=2, col='#252525')
+        # axes and labels
+        axis(1, las=1)
+        axis(2, las=1)
+        proportionalLabel(-0.2, 0.5, expression(paste(tilde(italic(q))[italic(y)])), cex=1.5, adj=c(0.5, 0.5), xpd=NA, srt=90)
+#        proportionalLabel(-0.15, 0.5, expression(paste(tilde(italic(q))[italic(y)]^italic(A)/tilde(italic(q))[italic(y)]^italic(X))), cex=1.2, adj=c(0.5, 0.5), xpd=NA, srt=90)
+        proportionalLabel(0.5, -0.2, expression(paste(italic(s[m]))), cex=1.5, adj=c(0.5, 0.5), xpd=NA)
+        proportionalLabel(0.03, 1.075, expression(paste(bold(A))), cex=1.2, adj=c(0.5, 0.5), xpd=NA)
+        #legend
+        legend(
+              x       =  usr[2]*0.95,
+              y       =  usr[4]*0.98,
+              legend  =  c(
+                          expression(paste(italic(delta)~"="~"0.095")),
+                          expression(paste(italic(delta)~"="~"0.0975")),
+                          expression(paste(italic(delta)~"="~"0.0985"))),
+#              legend  =  c(
+#                          expression(paste(italic(s[o])~"="~"0.005")),
+#                          expression(paste(italic(s[o])~"="~"0.0025")),
+#                          expression(paste(italic(s[o])~"="~"0.0015"))),
+              lty     =  1,
+              lwd     =  3,
+              col     =  c('#252525', 'grey50', 'grey70'),
+              cex     =  1,
+              xjust   =  1,
+              yjust   =  1,
+              bty     =  'n',
+              border  =  NA
+        )
+        legend(
+              x       =  usr[2]*0.6,
+              y       =  usr[4]*0.98,
+              legend  =  c(
+                          expression(paste("Autosomal")),
+                          expression(paste("X-linked"))),
+              lty     =  c(1,2),
+              lwd     =  3,
+              seg.len =  3,
+              col     =  '#252525',
+              cex     =  1,
+              xjust   =  1,
+              yjust   =  1,
+              bty     =  'n',
+              border  =  NA
+        )
+
+# Panel B: Relative Probability of invasion
+    # Import Data
+    aDat = './output/data/simData/dataYAutoInv_sm0.1_delta0.005_sc0.005_N1000_reps5e+05.csv'
+    xDat = './output/data/simData/dataYXLinkedInv_sm0.1_delta0.005_sc0.005_N1000_reps5e+05.csv'
+    aDat1 = './output/data/simData/dataYAutoInv_sm0.1_delta0.05_sc0.005_N1000_reps5e+05.csv'
+    xDat1 = './output/data/simData/dataYXLinkedInv_sm0.1_delta0.05_sc0.005_N1000_reps5e+05.csv'
+    aDat2 = './output/data/simData/dataYAutoInv_sm0.1_delta0.095_sc0.005_N1000_reps7500000.csv'
+    xDat2 = './output/data/simData/dataYXLinkedInv_sm0.1_delta0.095_sc0.005_N1000_reps7500000.csv'
+    autoDat     <-  read.csv(aDat, header=TRUE)
+    XLinkedDat  <-  read.csv(xDat, header=TRUE)
+    autoDat1     <-  read.csv(aDat1, header=TRUE)
+    XLinkedDat1  <-  read.csv(xDat1, header=TRUE)
+    autoDat2     <-  read.csv(aDat2, header=TRUE)
+    XLinkedDat2  <-  read.csv(xDat2, header=TRUE)
+
+    # Calculate Relative Invasion Probabilities
+    Py   <-  autoDat$pInvade_y / XLinkedDat$pInvade_y
+    Pxa  <-  XLinkedDat$pInvade_x / autoDat$pInvade_a
+    Py1   <-  autoDat1$pInvade_y / XLinkedDat1$pInvade_y
+    Pxa1  <-  XLinkedDat1$pInvade_x / autoDat1$pInvade_a
+    Py2  <-  autoDat2$pInvade_y / XLinkedDat2$pInvade_y
+    Pxa2 <-  XLinkedDat2$pInvade_x / autoDat2$pInvade_a
+
+        # Make the plot
+#        par(omi=rep(0.5, 4), mar = c(3,3,0.5,0.5), bty='o', xaxt='s', yaxt='s')
+        plot(NA, axes=FALSE, type='n', main='',xlim = c(0,1), ylim = c(0.9,1.4), ylab='', xlab='', cex.lab=1.2)
+        usr  <-  par('usr')
+        rect(usr[1], usr[3], usr[2], usr[4], col='white', border=NA)
+        plotGrid(lineCol='grey80')
+        box()
+        # plot data
+#        points(Py ~ autoDat$ho, pch=21, ylim=c(0,2))
+#        points(Py2 ~ autoDat2$ho, pch=21, ylim=c(0,2))
+        abline(h=1,lty=2, lwd=2)
+        points(Pxa  ~ autoDat$ho, pch=21, bg='grey80', cex=1.5)
+        points(Pxa1  ~ autoDat$ho, pch=21, bg='grey60', cex=1.5)
+        points(Pxa2 ~ autoDat$ho, pch=21, bg=transparentColor('#252525', opacity=0.85), cex=1.5)
+        # axes and labels
+        axis(1, las=1)
+        axis(2, las=1)
+        proportionalLabel(-0.2, 0.5, expression(paste(Pi[X]/Pi[A])), cex=1.2, adj=c(0.5, 0.5), xpd=NA, srt=90)
+        proportionalLabel(0.5, -0.2, expression(paste(italic(h))), cex=1.2, adj=c(0.5, 0.5), xpd=NA)
+        proportionalLabel(0.03, 1.075, expression(paste(bold(B))), cex=1.2, adj=c(0.5, 0.5), xpd=NA)
+        #legend
+        legend(
+              x       =  usr[2]*0.98,
+              y       =  usr[4]*0.98,
+              legend  =  c(
+                          expression(paste(italic(delta)~"="~"0.005")),
+                          expression(paste(italic(delta)~"="~"0.05")),
+                          expression(paste(italic(delta)~"="~"0.095"))),
+              pch     =  21,
+              pt.bg   =  c('grey80', 'grey60', transparentColor('#252525', opacity=0.85)),
+              cex     =  1,
+              xjust   =  1,
+              yjust   =  1,
+              bty     =  'n',
+              border  =  NA
+        )
+
+
+
+# Panel C: Time to complete coevolutionary cycle
+    YA1      <-  "./output/data/simData/dataYATimeFixMutGrad2_sm0.1_delta0.05_ho0.1_sc0.005_hc0.1_N1000_reps500.csv"
+    YX1      <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.05_ho0.1_sc0.05_hc0.1_N1000_reps500.csv"
+    YA2      <-  "./output/data/simData/dataYATimeFixMutGrad2_sm0.1_delta0.05_ho0.1_sc0.05_hc0.1_N1000_reps500.csv"
+    YX2      <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.05_ho0.1_sc0.005_hc0.1_N1000_reps500.csv"
+    YA3      <-  "./output/data/simData/dataYATimeFixMutGrad2_sm0.1_delta0.05_ho0.5_sc0.005_hc0.5_N1000_reps500.csv"
+    YX3      <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.05_ho0.5_sc0.05_hc0.5_N1000_reps500.csv"
+    YA4      <-  "./output/data/simData/dataYATimeFixMutGrad2_sm0.1_delta0.05_ho0.5_sc0.05_hc0.5_N1000_reps500.csv"
+    YX4      <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.05_ho0.5_sc0.005_hc0.5_N1000_reps500.csv"
+
+    YA5      <-  "./output/data/simData/dataYATimeFixMutGrad2_sm0.1_delta0.05_ho0.9_sc0.005_hc0.9_N1000_reps500.csv"
+    YX5      <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.05_ho0.9_sc0.05_hc0.9_N1000_reps500.csv"
+    YA6      <-  "./output/data/simData/dataYATimeFixMutGrad2_sm0.1_delta0.05_ho0.9_sc0.05_hc0.9_N1000_reps500.csv"
+    YX6      <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.05_ho0.9_sc0.005_hc0.9_N1000_reps500.csv"
+
+    aData1   <-  read.csv(YA1, header=TRUE)
+    xData1   <-  read.csv(YX1, header=TRUE)
+    aData2   <-  read.csv(YA2, header=TRUE)
+    xData2   <-  read.csv(YX2, header=TRUE)
+    aData3   <-  read.csv(YA3, header=TRUE)
+    xData3   <-  read.csv(YX3, header=TRUE)
+    aData4   <-  read.csv(YA4, header=TRUE)
+    xData4   <-  read.csv(YX4, header=TRUE)
+    aData5   <-  read.csv(YA5, header=TRUE)
+    xData5   <-  read.csv(YX5, header=TRUE)
+    aData6   <-  read.csv(YA6, header=TRUE)
+    xData6   <-  read.csv(YX6, header=TRUE)
+    tCycle1  <-  xData1$tCycle / aData1$tCycle
+    tCycle2  <-  xData2$tCycle / aData2$tCycle
+    tCycle3  <-  xData3$tCycle / aData3$tCycle
+    tCycle4  <-  xData4$tCycle / aData4$tCycle
+    tCycle5  <-  xData5$tCycle / aData5$tCycle
+    tCycle6  <-  xData6$tCycle / aData6$tCycle
+
+    relMutRate  <-  aData1$ua / aData1$uy
+
+        plot(NA, axes=FALSE, type='n', main='',xlim = c(0,1), ylim = c(0.7,1.2), ylab='', xlab='', cex.lab=1.2)
+        usr  <-  par('usr')
+        rect(usr[1], usr[3], usr[2], usr[4], col='white', border=NA)
+        plotGrid(lineCol='grey80')
+        box()
+        # plot data
+        abline(h=1,lty=2, lwd=2)
+        points(tCycle1 ~ (relMutRate), pch=22, bg="#252525", col='black', cex=1.5, type='b', ylim=c(0,2))
+        points(tCycle2 ~ (relMutRate), pch=22, bg="grey80", col='black', cex=1.5, type='b', ylim=c(0,2))
+        points(tCycle3 ~ (relMutRate), pch=21, bg="#252525", col='black', cex=1.5, type='b', ylim=c(0,2))
+        points(tCycle4 ~ (relMutRate), pch=21, bg="grey80", col='black', cex=1.5, type='b', ylim=c(0,2))
+        points(tCycle5 ~ (relMutRate), pch=24, bg="#252525", col='black', cex=1.5, type='b', ylim=c(0,2))
+        points(tCycle6 ~ (relMutRate), pch=24, bg="grey80", col='black', cex=1.5, type='b', ylim=c(0,2))
+        # axes and labels
+        axis(1, las=1)
+        axis(2, las=1)
+        proportionalLabel(-0.2, 0.5, expression(paste(T[X]/T[A])), cex=1.2, adj=c(0.5, 0.5), xpd=NA, srt=90)
         proportionalLabel(0.5, -0.2, expression(paste(italic(mu[i])/italic(mu[y]))), cex=1.2, adj=c(0.5, 0.5), xpd=NA)
         proportionalLabel(0.03, 1.075, expression(paste(bold(C))), cex=1.2, adj=c(0.5, 0.5), xpd=NA)
         #legend
@@ -628,6 +882,12 @@ relCycleTimeFig  <-  function(aDat = './output/data/simData/dataYATimeFix_sm0.1_
     DeltaInvFix  <-  aData$deltaInvFix / xData$deltaInvFix
     tCycle       <-  aData$tCycle      / xData$tCycle
 
+    # relative size of X vs. Autosomal genome in 
+    # D. melanogaster (see Adams et al. 2000)
+    MbA  <-  23 + 5.4 + 11 + 21.4 + 24.4 + 8.2 + 8.2 + 28 + 3.1 + 1.2
+    MbX  <-  20+21.8
+    MbY  <-  40.9
+
         # Make the plot
 #        par(omi=rep(0.5, 4), mar = c(3,3,0.5,0.5), bty='o', xaxt='s', yaxt='s')
         plot(NA, axes=FALSE, type='n', main='',xlim = c(0,1), ylim = c(0.5,1.1), ylab='', xlab='', cex.lab=1.2)
@@ -688,7 +948,15 @@ YX7  <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.095_ho0.5_sc0
     tCycle        <-       xData$tCycle / aData$tCycle
     tCycle2       <-       xData2$tCycle / aData2$tCycle
 
-    relMutRate  <-  aData$ua / aData$uy
+    # relative size of X vs. Autosomal genome in 
+    # D. melanogaster (see Adams et al. 2000)
+    MbA  <-  23 + 5.4 + 11 + 21.4 + 24.4 + 8.2 + 8.2 + 28 + 3.1 + 1.2
+    MbX  <-  20 + 21.8
+    MbY  <-  40.9
+    relMuA  <-  MbA / (MbA + MbX)
+    relMuX  <-  MbX / (MbA + MbX)
+    relMutRateA  <-  (aData$ua * relMuA) / aData$uy
+    relMutRateX  <-  (aData$ux * relMuA) / aData$uy
 
     # Set plot layout
     layout.mat <- matrix(c(1:4), nrow=2, ncol=2, byrow=TRUE)
@@ -711,7 +979,7 @@ YX7  <-  "./output/data/simData/dataYXTimeFixMutGrad2_sm0.1_delta0.095_ho0.5_sc0
         axis(1, las=1)
         axis(2, las=1)
 #        proportionalLabel(-0.4, 0.5, expression(paste(italic(h), " = 1/2")), cex=1.2, adj=c(0.5, 0.5), xpd=NA, srt=90)
-        proportionalLabel(-0.25, 0.5, expression(paste(T["cycle,X"]/T["cycle,A"])), cex=1.2, adj=c(0.5, 0.5), xpd=NA, srt=90)
+        proportionalLabel(-0.25, 0.5, expression(paste(T[X]/T[A])), cex=1.2, adj=c(0.5, 0.5), xpd=NA, srt=90)
         proportionalLabel(0.5, -0.25, expression(paste(italic(mu[i])/italic(mu[y]))), cex=1.2, adj=c(0.5, 0.5), xpd=NA)
         proportionalLabel(0.5, 1.15, expression(paste("Time to complete coevolutionary cycle")), cex=1.2, adj=c(0.5, 0.5), xpd=NA)
 #        proportionalLabel(0.03, 1.075, 'A', cex=1.2, adj=c(0.5, 0.5), xpd=NA)

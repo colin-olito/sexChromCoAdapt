@@ -737,6 +737,17 @@ makeDataYATimeFixMutGrad  <-  function(reps = reps, N = N, sm = sm,
 	# length of mutation rate gradient being explored
 	len.ua  <-  length(ua.vals)
 
+    # Calculate weighted mutation rate from
+    # relative size of X vs. Autosomal genome in 
+    # D. melanogaster (see Adams et al. 2000)
+    MbA  <-  23 + 5.4 + 11 + 21.4 + 24.4 + 8.2 + 8.2 + 28 + 3.1 + 1.2
+    MbX  <-  20 + 21.8
+    MbY  <-  40.9
+    weightMuA    <-  MbA / (MbA + MbX)
+    weightMuX    <-  MbX / (MbA + MbX)
+
+	ua.vals  <-  ua.vals * weightMuA
+
 	# Define output variables
 	tInvade_y    <-  c()
 	tFix_y       <-  c()
@@ -840,6 +851,6 @@ makeDataYATimeFixMutGrad  <-  function(reps = reps, N = N, sm = sm,
 						 "qyTildeTime"  =  qyTildeTime
 						)
 	# Write data to file
-	filename  <-  paste("./output/data/simData/dataYATimeFixMutGrad2", "_sm", sm, "_delta", delta, "_ho", ho, "_sc", sc, "_hc", hc, "_N", N, "_reps", reps, ".csv", sep="")	
+	filename  <-  paste("./output/data/simData/dataYATimeFixMutGrad2_weighted", "_sm", sm, "_delta", delta, "_ho", ho, "_sc", sc, "_hc", hc, "_N", N, "_reps", reps, ".csv", sep="")	
 	write.csv(data, file=filename)
 }
